@@ -1,6 +1,20 @@
 {% extends "index.html" %}
-
 {% block content %}
-<p> {{categories}}</p>
 
+<h2>Categories</h2>
+
+<ul>
+    
+
+    {% for category in all_productTypes %}
+    <h4>{{category.productCategory}}</h4>
+    {% for product in all_products %}
+
+        {% if product.productType_id == category.id %}
+    
+    <li> {{product.title}}</li>
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+</ul>
 {% endblock content %}
