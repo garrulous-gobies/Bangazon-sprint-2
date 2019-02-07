@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.template import RequestContext
 from .models import *
-from website.forms import UserForm, ProductForm
+from website.forms import UserForm, ProductForm, CustomerForm
 # from website.models import Product
 
 def index(request):
@@ -28,6 +28,7 @@ def register(request):
     # on Django's built-in User model
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
+        customer_form = CustomerForm(data=request.Post)
 
         if user_form.is_valid():
             # Save the user's form data to the database.
@@ -40,13 +41,17 @@ def register(request):
 
             # Update our variable to tell the template registration was successful.
             registered = True
+        if customer_form.is_valid():
+            customer = customer_form.save()
+            customer.save()
 
         return login_user(request)
 
     elif request.method == 'GET':
         user_form = UserForm()
+        customer_form = CustomerForm()
         template_name = 'register.html'
-        return render(request, template_name, {'user_form': user_form})
+        return render(request, template_name, {'user_form': user_form, 'customer_form': customer_form})
 
 
 def login_user(request):
