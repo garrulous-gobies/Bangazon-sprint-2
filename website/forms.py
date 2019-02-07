@@ -16,6 +16,7 @@ class CustomerForm(forms.ModelForm):
         fields = ('address', 'phoneNumber',)
 
 
+
 class ProductForm(forms.ModelForm):
 
     class Meta:

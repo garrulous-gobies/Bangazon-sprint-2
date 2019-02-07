@@ -30,9 +30,10 @@ class Product(models.Model):
 
 # Create Customer model.
 class Customer(models.Model):
-    customerUser = models.ForeignKey(
+    user = models.OneToOneField(
         User,
         on_delete=models.DO_NOTHING,
+        primary_key=True,
     )
     address = models.CharField(max_length=255)
     phoneNumber = models.CharField(max_length=255)

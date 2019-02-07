@@ -24,28 +24,21 @@ def register(request):
     # Set to False initially. Code changes value to True when registration succeeds.
     registered = False
 
-    # Create a new user by invoking the `create_user` helper method
-    # on Django's built-in User model
+    # Create a new user as well as a new customer at the same time
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
-        customer_form = CustomerForm(data=request.Post)
-
-        if user_form.is_valid():
-            # Save the user's form data to the database.
+        customer_form = CustomerForm(data=request.POST)
+        if user_form.is_valid() and customer_form.is_valid():
             user = user_form.save()
-
-            # Now we hash the password with the set_password method.
-            # Once hashed, we can update the user object.
+            customer = customer_form.save()
+            customer.user = user
             user.set_password(user.password)
             user.save()
-
-            # Update our variable to tell the template registration was successful.
-            registered = True
-        if customer_form.is_valid():
-            customer = customer_form.save()
             customer.save()
+            return login_user(request)
 
-        return login_user(request)
+        else:
+            print("not valid user form")
 
     elif request.method == 'GET':
         user_form = UserForm()
