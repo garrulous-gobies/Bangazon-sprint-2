@@ -258,4 +258,19 @@ c.execute('''INSERT INTO website_productType Values (
             8,
             "Apparel",
             0)''')
+c.execute('''INSERT INTO website_order Values (
+            1,
+            0,
+            1,
+            1)''')
+c.execute('''INSERT INTO website_productOrder Values (
+            1,
+            0,
+            1,
+            3)''')
+c.execute('''INSERT INTO website_productOrder Values (
+            2,
+            0,
+            1,
+            6)''')
 conn.commit()

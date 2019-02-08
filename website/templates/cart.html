@@ -1,6 +1,20 @@
 {% extends "index.html" %}
 
 {% block content %}
-<p> {{cart}}</p>
+<h1 class="cart_main_title">Your Bangazon Cart</h1>
+<section class="cart_item_labels">
+        <p class="cart_image_title">Product</p>
+        <p class="cart_title">Name</p>
+        <p class="cart_description">Description</p>
+        <p class="cart_price">Price Per Item</p>
+    </section>
+{% for product in products_in_cart %}
+    <section class="cart_item">
+        <img class="cart_item_image" src={{product.image}} alt={{product.title}}>
+        <p class="cart_title"> {{product.title}}</p>
+        <p class="cart_description"> {{product.description}}</p>
+        <p class="cart_price"> ${{product.price}}</p>
+    </section>
+{% endfor %}
 
 {% endblock content %}
