@@ -61,7 +61,7 @@ class PaymentMethod(models.Model):
         Customer,
         on_delete=models.DO_NOTHING,
     )
-    accountNumber = models.PositiveIntegerField     ()
+    accountNumber = models.PositiveIntegerField()
     deleted = models.BooleanField(default=False)
     def __str__(self):
         return self
