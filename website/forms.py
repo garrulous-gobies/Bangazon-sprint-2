@@ -19,15 +19,17 @@ class CustomerForm(forms.ModelForm):
 
 class ProductForm(forms.ModelForm):
     # generate a tuple of tuples to populate the dropdown field with product categories
-    sql = 'SELECT id, productCategory FROM website_producttype'
-    product_types = ProductType.objects.raw(sql, None)
-    choices = list()
-    for p in product_types:
-        product_choice = (p.id, p.productCategory)
-        choices.append(product_choice)
-    choices = tuple(choices)
+    def get_categories():
+        sql = 'SELECT id, productCategory FROM website_producttype'
+        product_types = ProductType.objects.raw(sql, None)
+        choices = [('', 'select category')]
+        for p in product_types:
+            product_choice = (p.id, p.productCategory)
+            choices.append(product_choice)
+        choices = tuple(choices)
+        return choices
 
-    category = forms.ChoiceField(choices=choices)
+    category = forms.ChoiceField(choices=get_categories)
 
     class Meta:
         model = Product
