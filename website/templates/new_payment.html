@@ -1,0 +1,11 @@
+{% extends "index.html" %}
+
+{% block content %}
+<p> Add a new payment option </p>
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ payment_form.as_p }}
+    <input type="submit" value="Add Payment Option" />
+</form>
+{% endblock content %}

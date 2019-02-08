@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.template import RequestContext
 
-from website.forms import UserForm, ProductForm
+from website.forms import UserForm, ProductForm, PaymentForm
 from website.models import Product
 from django.db import connection
 
@@ -36,5 +36,19 @@ def profile(request, pk):
 
     return render(request, 'profile.html', context)
 
+
+def add_payment(request, pk):
+    """[summary]
+    
+    Arguments:
+        request {[type]} -- [description]
+        pk {[type]} -- [description]
+
+    Author(s): Austin Zoradi
+    """
+    if request.method == 'GET':
+        payment_form = PaymentForm()
+        context = {"payment_form": payment_form}
+        return render(request, 'new_payment.html', context)
   
     
