@@ -19,6 +19,7 @@ class Product(models.Model):
     description = models.TextField(blank=True, null=True)
     price = models.FloatField()
     quantity = models.IntegerField()
+    image = models.TextField(blank=True, null=True)
     productType = models.ForeignKey(
         ProductType,
         default = 0,

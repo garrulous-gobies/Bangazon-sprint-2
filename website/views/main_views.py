@@ -9,7 +9,12 @@ from website.models import Product
 
 def index(request):
     template_name = 'index.html'
-    return render(request, template_name, {})
+    all_products = Product.objects.raw('''SELECT *
+                                        from website_product
+                                        ORDER BY id
+                                        DESC LIMIT 20''')
+    return render(request, template_name, {'products': all_products})
+
 
 
 
