@@ -21,4 +21,12 @@ class ProductForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ('title', 'description', 'price', 'quantity',)
+        fields =('title', 'description', 'price', 'quantity',)
+        error_messages = {
+            'price': {
+                'min_value': "Price must be at least $0.02"
+            },
+            'quantity': {
+                'min_value': "Quantity must be at least 1"
+            },
+        }

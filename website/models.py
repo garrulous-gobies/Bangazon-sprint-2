@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.core.validators import MinValueValidator
+
 
 
 #  ProductType model creation
@@ -15,10 +17,10 @@ class Product(models.Model):
         User,
         on_delete=models.DO_NOTHING,
     )
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=80)
     description = models.TextField(blank=True, null=True)
-    price = models.FloatField()
-    quantity = models.IntegerField()
+    price = models.DecimalField(validators=[MinValueValidator(.01)], max_digits=8, decimal_places=2)
+    quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)])
     productType = models.ForeignKey(
         ProductType,
         default = 0,
