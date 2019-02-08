@@ -4,10 +4,8 @@
 <h2>Categories</h2>
 
 <ul>
-    
-
     {% for category in all_productTypes %}
-    <h4>{{category.productCategory}}</h4>
+    <h4>{{category.productCategory}} ({{category.product_set.all|length}})</h4>
     {% for product in all_products %}
 
         {% if product.productType_id == category.id %}
