@@ -6,9 +6,34 @@ from django.template import RequestContext
 
 from website.forms import UserForm, ProductForm
 from website.models import Product
+from django.db import connection
 
 def profile(request, pk):
-    context = {"profile":"its me"}
+    """Lists profile information for current user. This uses raw SQL that does not correspond to a custom defined model. This does returns a list rather than a dictionary,
+    so the dictionary must be created manually.
+    Model: User model (built in, not a custom model)
+    Template: profile.html
+    Author(s): Zac Jones
+    """
+    
+    with connection.cursor() as cursor:
+            try:
+                cursor.execute(f'''SELECT * FROM auth_user WHERE id = {pk}
+                            ''')
+                
+                columns = [col[0] for col in cursor.description]
+
+                profile = dict()
+
+                for row in cursor.fetchall():
+                    to_add = dict(zip(columns, row))
+                    profile.update(to_add)
+
+            except connection.OperationalError as err:
+                print("Error...", err)
+    
+    context = {"profile": profile}
+
     return render(request, 'profile.html', context)
 
   
