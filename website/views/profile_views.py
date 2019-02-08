@@ -18,7 +18,7 @@ def profile(request, pk):
     
     with connection.cursor() as cursor:
             try:
-                cursor.execute(f'''SELECT * FROM auth_user WHERE id = {pk}
+                cursor.execute(f'''SELECT * FROM auth_user JOIN website_customer ON auth_user.id = website_customer.user_id WHERE auth_user.id = {pk}
                             ''')
                 
                 columns = [col[0] for col in cursor.description]
