@@ -39,3 +39,15 @@
     font-weight: 500;
     font-size: 14px;
 }
+
+.add_to_cart {
+    border: 3px solid;
+    padding: 5px;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    width: 135px;
+    justify-content: center;
+    font-weight: bold;
+    border-radius: 20px;
+}
