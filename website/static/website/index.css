@@ -1,0 +1,53 @@
+.bangazon_logo {
+    max-width: 40vw;
+    display: flex;
+    margin: auto;
+}
+
+.product_title {
+    font-size: 30px;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.product_image {
+    max-width: 50vw;
+    max-height: 40vh;
+    display: flex;
+    margin: auto;
+}
+
+.product_description {
+    width: 90vw;
+    margin-left: 5vw;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.product_price {
+    width: 90vw;
+    margin: auto;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 16px;
+}
+
+.product_quantity {
+    width: 90vw;
+    margin: auto;
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.add_to_cart {
+    border: 3px solid;
+    padding: 5px;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    width: 135px;
+    justify-content: center;
+    font-weight: bold;
+    border-radius: 20px;
+}

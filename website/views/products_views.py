@@ -1,7 +1,7 @@
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
 
 from website.forms import UserForm, ProductForm
@@ -40,3 +40,8 @@ def categories(request):
     all_productTypes = ProductType.objects.raw(sql2)
     context = {"all_products": all_products, "all_productTypes": all_productTypes}
     return render(request, 'categories.html', context)
+    
+def product_details(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    template_name = 'product_details.html'
+    return render(request, template_name, {'product': product})
