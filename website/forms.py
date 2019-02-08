@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django import forms
-from website.models import Product, Customer, PaymentMethod, PaymentType
+from website.models import Product, Customer, PaymentMethod, PaymentType, ProductType
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())

@@ -6,6 +6,6 @@
 <form action="{% url 'website:add_payment' user.id %}" method="post">
     {% csrf_token %}
     {{ payment_form.as_p }}
-    <input type="submit" value="Add Payment Option" />
+    <input type="submit"  class="btn btn-primary " value="Add Payment Option" />
 </form>
 {% endblock content %}
