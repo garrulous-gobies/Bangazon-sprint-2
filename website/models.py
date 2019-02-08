@@ -18,7 +18,7 @@ class Product(models.Model):
         on_delete=models.DO_NOTHING,
     )
     title = models.CharField(max_length=80)
-    description = models.TextField(blank=True, null=True, max_length=500)
+    description = models.TextField(blank=True, null=True)
     price = models.DecimalField(validators=[MinValueValidator(.01)], max_digits=8, decimal_places=2)
     quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)])
     productType = models.ForeignKey(
