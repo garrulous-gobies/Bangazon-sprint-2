@@ -55,3 +55,4 @@ def sell_product(request):
             return render(request, template_name, {'product_form': product_form})
         template_name = 'product/success.html'
         return render(request, template_name, {})
+    

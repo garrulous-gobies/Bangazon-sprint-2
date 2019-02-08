@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django import forms
-from website.models import Product, Customer, PaymentMethod
+from website.models import Product, Customer, PaymentMethod, PaymentType
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -32,7 +32,20 @@ class ProductForm(forms.ModelForm):
         }
 
 class PaymentForm(forms.ModelForm):
+    def getPaymentType():
+        sql = "SELECT * FROM website_paymenttype"
+        payment_types = PaymentType.objects.raw(sql)
+        print(payment_types)
+        choices = [("", "Select a Payment Type")]
 
+        for choice in payment_types:
+            item = (choice.id, choice.paymentCategory)
+            choices.append(item)
+
+        return choices
+    
+    paymentName = forms.ChoiceField(choices=getPaymentType)
+    
     class Meta:
         model = PaymentMethod
         fields = ('accountNumber', 'paymentName')
