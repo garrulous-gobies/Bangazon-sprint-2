@@ -1,6 +1,26 @@
 {% extends "index.html" %}
-
 {% block content %}
-<p> {{categories}}</p>
 
+<h2>Categories</h2>
+<div>
+
+    <ul class="list-group list-group-flush dept_list">
+        {% for category in all_productTypes %}
+
+        <h4>{{category.productCategory}} ({{category.product_set.all|length}})</h4>
+
+        {% for products in limit_products_list %}
+
+        {% for product in products %}
+
+        {% if product.productType_id == category.id %}
+
+        <li class="list-group-item"> <a href="{% url 'website:product_details' product.id %}">{{product.title}}</a></li>
+
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
 {% endblock content %}

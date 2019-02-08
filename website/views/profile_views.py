@@ -3,13 +3,77 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.template import RequestContext
+from django.urls import reverse
 
-from website.forms import UserForm, ProductForm
+from website.forms import UserForm, ProductForm, PaymentForm
 from website.models import Product
+from django.db import connection
 
 def profile(request, pk):
-    context = {"profile":"its me"}
+    """Lists profile information for current user. This uses raw SQL that does not correspond to a custom defined model. This does returns a list rather than a dictionary,
+    so the dictionary must be created manually.
+    Model: User model (built in, not a custom model)
+    Template: profile.html
+    Author(s): Zac Jones
+    """
+    
+    with connection.cursor() as cursor:
+            try:
+                cursor.execute(f'''SELECT * FROM auth_user WHERE id = {pk}
+                            ''')
+                
+                columns = [col[0] for col in cursor.description]
+
+                profile = dict()
+
+                for row in cursor.fetchall():
+                    to_add = dict(zip(columns, row))
+                    profile.update(to_add)
+
+            except connection.OperationalError as err:
+                print("Error...", err)
+    
+    context = {"profile": profile}
+
     return render(request, 'profile.html', context)
+
+
+def add_payment(request, pk):
+    """[summary]
+    
+    Arguments:
+        request {[type]} -- [description]
+        pk {[type]} -- [description]
+
+    Author(s): Austin Zoradi
+    """
+    if request.method == 'GET':
+        payment_form = PaymentForm()
+        context = {"payment_form": payment_form}
+        return render(request, 'new_payment.html', context)
+
+    elif request.method == 'POST':
+        form_data = request.POST
+        pt_form_data = {
+          "accountNumber": form_data["accountNumber"],
+          "paymentName": form_data["paymentName"] 
+        }
+
+
+        # customer_id = request.user.id
+        sql = "INSERT INTO website_paymentmethod VALUES (%s,%s,%s,%s,%s)"
+        payment_params = [
+            None,
+            pt_form_data['accountNumber'],
+            0,
+            pk,
+            pt_form_data["paymentName"]
+        ]
+        
+        with connection.cursor() as cursor:
+            cursor.execute(sql, payment_params)
+
+        return render(request, 'profile.html', {})
 
   
     
