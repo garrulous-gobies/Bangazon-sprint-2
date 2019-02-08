@@ -4,8 +4,6 @@
 
     <h1>Welcome to Your Profile, {{profile.first_name}}</h1>
 
-    <p>I need to include: first name, last name, address, phone, payment options, and order history!</p>
-
     <h3>Your Information</h3>
 
         <ul>
@@ -14,6 +12,8 @@
             <li>Address: {{profile.address}}</li>
             <li>Phone: {{profile.phoneNumber}}</li>
         </ul>
+
+        <button class="btn btn_margin btn-primary"><a href="{% url 'website:edit_profile' profile.id %}">Edit My Info</a></button>
 
     <h3>Payment Options</h3>
 

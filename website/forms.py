@@ -30,3 +30,12 @@ class ProductForm(forms.ModelForm):
                 'min_value': "Quantity must be at least 1"
             },
         }
+
+class ProfileForm(forms.ModelForm):
+
+    # address, phone are on a different model
+    # just trying User info for now
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name')
