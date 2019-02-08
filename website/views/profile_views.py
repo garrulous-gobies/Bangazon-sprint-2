@@ -72,24 +72,23 @@ def submit_profile(request, pk):
         'last_name': form_data['last_name']
     }
 
-    print(pro_form_data)
-
     customer_id = request.user.id
 
-    sql = "UPDATE auth_user SET (%s, %s, %s) WHERE auth_user.id = {customer_id}"
+    # TODO: this sql query ONLY INCLUDES first name and last name. Obviously will want to edit more info, so code those in
+
+    sql = "UPDATE auth_user SET first_name=%s, last_name=%s WHERE auth_user.id = %s"
     profile_params = [
-        None,
         pro_form_data['first_name'],
-        pro_form_data['last_name']
+        pro_form_data['last_name'],
+        customer_id
     ]
+
+    print(profile_params)
 
     with connection.cursor() as cursor:
         cursor.execute(sql, profile_params)
-        # product_id = cursor.lastrowid
 
 
-
-    context = {"boi": "hey"}
     return HttpResponseRedirect(reverse('website:profile', args=(pk,)))
 
   
