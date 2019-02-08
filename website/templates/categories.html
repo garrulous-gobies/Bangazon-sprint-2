@@ -2,17 +2,21 @@
 {% block content %}
 
 <h2>Categories</h2>
+<div>
 
-<ul>
-    {% for category in all_productTypes %}
-    <h4>{{category.productCategory}} ({{category.product_set.all|length}})</h4>
-    {% for product in all_products %}
+    <ul class="list-group list-group-flush dept_list">
+        {% for category in all_productTypes %}
+        <h4>{{category.productCategory}} ({{category.product_set.all|length}})</h4>
+
+        {% for product in all_products %}
 
         {% if product.productType_id == category.id %}
-    
-    <li> {{product.title}}</li>
-    {% endif %}
-    {% endfor %}
-    {% endfor %}
-</ul>
+
+        <li class="list-group-item"> {{product.title}}</li>
+
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
 {% endblock content %}

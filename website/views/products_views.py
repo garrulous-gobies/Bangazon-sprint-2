@@ -25,11 +25,15 @@ def categories(request):
 
     sql = """ SELECT * 
               FROM "website_product"
-              
     """
 
     sql2 = """SELECT *
               FROM "website_producttype"
+    """
+
+    sql3 = """SELECT *
+               FROM "website_product"
+               WHERE    
     """
 
     all_products = Product.objects.raw(sql)
