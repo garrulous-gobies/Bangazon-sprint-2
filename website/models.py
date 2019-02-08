@@ -21,6 +21,7 @@ class Product(models.Model):
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(validators=[MinValueValidator(.01)], max_digits=8, decimal_places=2)
     quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)])
+    image = models.TextField(blank=True, null=True)
     productType = models.ForeignKey(
         ProductType,
         default = 0,
