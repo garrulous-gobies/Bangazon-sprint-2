@@ -9,9 +9,9 @@
         <li>
             <a class="navbar-brand" href="{% url 'website:index' %}">Bangazon</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" href="{% url 'website:cart' user.id %}">Cart</a>
-        </li>
+        </li> -->
         <li class="nav-item">
             <a class="nav-link" href="{% url 'website:sell' %}">Sell</a>
         </li>
@@ -26,7 +26,7 @@
         </li>
     </ul>
     <a class="cart_anchor" href="{% url 'website:cart' user.id %}">
-        <img class="cart_image" href="{% static './../../../static/website/emptycart.png' %}" alt="Shopping Cart">
+        <img class="cart_image" src="{% static 'website/emptycart.png' %}" alt="Shopping Cart">
     </a>
 </nav>
 

@@ -8,6 +8,6 @@ from website.forms import UserForm, ProductForm
 from website.models import Product
 
 
-def cart(request, pk):
+def cart(request, user_id):
     context = {"cart": "hotdog"}
     return render(request, 'cart.html', context )

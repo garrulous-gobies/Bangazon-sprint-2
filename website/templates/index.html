@@ -25,7 +25,7 @@
     <h1>Bangazon says... hello {{ user.username }}!</h1>
     <a href="{% url 'website:logout' %}">Logout</a>
     {% else %}
-    <img class="bangazon_logo" src="{% static './../../../static/website/bangazon2icon.png' %}" alt="Bangazon Logo">
+    <img class="bangazon_logo" src="{% static 'website/bangazon2icon.png' %}" alt="Bangazon Logo">
     <h1>Bangazon says...</h1>
     <div><a href="{% url 'website:register' %}">Register</a></div>
     <div><a href="{% url 'website:login' %}">Login</a></div>

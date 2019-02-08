@@ -3,7 +3,11 @@
 }
 
 .cart_image {
-    
+    max-height: 4vw;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    margin-right: 20px;
 }
 
 .bangazon_logo {
