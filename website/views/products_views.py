@@ -33,12 +33,20 @@ def categories(request):
 
     sql3 = """SELECT *
                FROM "website_product"
-               WHERE    
+               WHERE website_product.ProductType_id = %s
+               LIMIT 3
     """
 
     all_products = Product.objects.raw(sql)
     all_productTypes = ProductType.objects.raw(sql2)
-    context = {"all_products": all_products, "all_productTypes": all_productTypes}
+    
+    limit_products_list = list()
+    
+    for cat_id in ProductType.objects.raw(sql2):
+        limit_products = Product.objects.raw(sql3, [cat_id.id,])
+        limit_products_list.append(limit_products)
+    
+    context = {"all_products": all_products, "all_productTypes": all_productTypes, "limit_products_list": limit_products_list}
     return render(request, 'categories.html', context)
     
 def product_details(request, product_id):

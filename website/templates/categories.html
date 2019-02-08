@@ -6,15 +6,19 @@
 
     <ul class="list-group list-group-flush dept_list">
         {% for category in all_productTypes %}
+
         <h4>{{category.productCategory}} ({{category.product_set.all|length}})</h4>
 
-        {% for product in all_products %}
+        {% for products in limit_products_list %}
+
+        {% for product in products %}
 
         {% if product.productType_id == category.id %}
 
-        <li class="list-group-item"> {{product.title}}</li>
+        <li class="list-group-item"> <a href="{% url 'website:product_details' product.id %}">{{product.title}}</a></li>
 
         {% endif %}
+        {% endfor %}
         {% endfor %}
         {% endfor %}
     </ul>
