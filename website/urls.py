@@ -13,5 +13,7 @@ urlpatterns = [
     url(r'^products/(?P<product_id>\d+)$', views.product_details, name='product_details'),
     url(r'^cart/(?P<user_id>\d+)$', views.cart, name="cart"),
     url(r'^categories$', views.categories, name="categories"),
-    url(r'^profile/(?P<pk>\d+)/$', views.profile, name="profile")
+    url(r'^profile/(?P<pk>\d+)/$', views.profile, name="profile"),
+    url(r'^profile/(?P<pk>\d+)/add_payment_option$', views.add_payment, name="add_payment")
+
 ]

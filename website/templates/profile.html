@@ -1,6 +1,32 @@
 {% extends "index.html" %}
 
 {% block content %}
-<p> {{profile}}</p>
+
+    <h1>Welcome to Your Profile, {{profile.first_name}}</h1>
+
+    <p>I need to include: first name, last name, address, phone, payment options, and order history!</p>
+
+    <h3>Your Information</h3>
+
+        <ul>
+            <li>First Name: {{profile.first_name}}</li>
+            <li>Last Name: {{profile.last_name}}</li>
+            <!-- <li>Address: </li> -->
+            <!-- <li>Phone: </li> -->
+        </ul>
+
+    <h3>Payment Options</h3>
+
+        <ul>
+            <li>Here is where payment options will be listed.</li>
+        </ul>
+
+        <button class="btn btn-primary"><a href="{% url 'website:add_payment' user.id %}"  >Add Payment Type</a></button>
+
+    <h3>Order History</h3>
+
+        <ul>
+            <li>Here is where order history will be listed.</li>
+        </ul>
 
 {% endblock content %}
