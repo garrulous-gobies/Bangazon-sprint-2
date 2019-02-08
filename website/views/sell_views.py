@@ -31,7 +31,6 @@ def sell_product(request):
         product_form = ProductForm(p_form_data)
 
         if product_form.is_valid():
-            print('++++++++++++++IM IN THE IF, SO IM VALID++++++++++++++++')
             customer_id = request.user.id
 
             sql = "INSERT INTO website_product VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"
@@ -51,9 +50,6 @@ def sell_product(request):
                 cursor.execute(sql, product_params)
                 product_id = cursor.lastrowid
         else:
-
-            print("=============INVALID FORM DATA=========",
-                  product_form.errors.as_json())
             template_name = 'product/create.html'
             return render(request, template_name, {'product_form': product_form})
 
