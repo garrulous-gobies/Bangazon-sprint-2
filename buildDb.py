@@ -273,4 +273,33 @@ c.execute('''INSERT INTO website_productOrder Values (
             0,
             1,
             6)''')
+c.execute('''INSERT INTO website_paymenttype VALUES (
+             1,
+            "Credit Card",
+             0)''')
+c.execute('''INSERT INTO website_paymenttype VALUES (
+             2,
+            "Debit Card",
+             0)''')
+c.execute('''INSERT INTO website_paymenttype VALUES (
+             3,
+            "Gift Card",
+             0)''')
+c.execute('''INSERT INTO website_paymenttype VALUES (
+             4,
+            "Gold Bullion",
+             0)''')
+c.execute('''INSERT INTO website_paymentmethod VALUES (
+             Null,
+             123412341234,
+             0,
+             1,
+             1)''')
+c.execute('''INSERT INTO website_paymentmethod VALUES (
+             Null,
+             999999999,
+             0,
+             1,
+             4)''')
+
 conn.commit()
