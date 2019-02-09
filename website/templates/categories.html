@@ -1,13 +1,13 @@
 {% extends "index.html" %}
 {% block content %}
 
-<h2>Categories</h2>
-<div>
+<h2 class="product_title">Categories</h2>
+<div class="category_div">
 
-    <ul class="list-group list-group-flush dept_list">
+    <ul class="list-group list-group-flush">
         {% for category in all_productTypes %}
 
-        <h4>{{category.productCategory}} ({{category.product_set.all|length}})</h4>
+        <h4 class="cat_title">{{category.productCategory}} ({{category.product_set.all|length}})</h4>
 
         {% for products in limit_products_list %}
 

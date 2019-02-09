@@ -116,3 +116,12 @@ button a {
     color: white;
     text-decoration: none;
 }
+
+.category_div{
+    margin: 0px 10px;
+}
+
+.cat_title {
+    margin: 5px 0px;
+    padding: 5px 0px;
+}
