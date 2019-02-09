@@ -1,3 +1,12 @@
+
+.cart_image {
+    max-height: 4vw;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    margin-right: 20px;
+}
+
 .bangazon_logo {
     max-width: 40vw;
     display: flex;
@@ -50,6 +59,57 @@
     justify-content: center;
     font-weight: bold;
     border-radius: 20px;
+}
+
+.cart_item_labels {
+    display: inline-flex;
+}
+
+.cart_item_labels > p {
+    font-weight: bolder;
+}
+
+.cart_item {
+    display: inline-flex;
+}
+
+.cart_main_title {
+    text-align: center;
+    font-weight: bolder;
+}
+
+.cart_image_title {
+    width: 15vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart_item_image {
+    width: 15vw;
+    max-height: 15vw;
+}
+
+.cart_title {
+    width: 30vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart_description {
+    width: 45vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart_price {
+    width: 10vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 button a {

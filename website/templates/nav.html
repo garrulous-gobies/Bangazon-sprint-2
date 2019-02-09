@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <!-- Basic block for navbar -->
 {% block nav %}
 {% if user.is_authenticated %}
@@ -7,9 +9,9 @@
         <li>
             <a class="navbar-brand" href="{% url 'website:index' %}">Bangazon</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" href="{% url 'website:cart' user.id %}">Cart</a>
-        </li>
+        </li> -->
         <li class="nav-item">
             <a class="nav-link" href="{% url 'website:sell' %}">Sell</a>
         </li>
@@ -23,7 +25,9 @@
             <a class="nav-link" href="{% url 'website:logout' %}">Logout</a>
         </li>
     </ul>
-    </div>
+    <a class="cart_anchor" href="{% url 'website:cart' user.id %}">
+        <img class="cart_image" src="{% static 'website/emptycart.png' %}" alt="Shopping Cart">
+    </a>
 </nav>
 
 {% else %}
