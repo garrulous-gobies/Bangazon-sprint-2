@@ -9,7 +9,7 @@ from website.models import Product, ProductType
 
 
 def list_products(request):
-    all_products = Product.objects.all()
+    all_products = Product.objects.raw("SELECT * from website_product")
     template_name = 'product/list.html'
     return render(request, template_name, {'products': all_products})
 
@@ -23,7 +23,7 @@ def categories(request):
     Author(s): Austin Zoradi
     """
 
-    sql = """ SELECT * 
+    sql = """ SELECT *
               FROM "website_product"
     """
 
@@ -39,17 +39,19 @@ def categories(request):
 
     all_products = Product.objects.raw(sql)
     all_productTypes = ProductType.objects.raw(sql2)
-    
+
     limit_products_list = list()
-    
+
     for cat_id in ProductType.objects.raw(sql2):
         limit_products = Product.objects.raw(sql3, [cat_id.id,])
         limit_products_list.append(limit_products)
-    
+
     context = {"all_products": all_products, "all_productTypes": all_productTypes, "limit_products_list": limit_products_list}
     return render(request, 'categories.html', context)
-    
+
 def product_details(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
+    product = Product.objects.raw('''SELECT * from website_product p
+                                            WHERE p.id = %s''', [product_id])[0]
     template_name = 'product_details.html'
-    return render(request, template_name, {'product': product})
+    print('product.id:', product_id)
+    return render(request, template_name, {'product': product, 'product_id': product_id})

@@ -1,6 +1,84 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.user_welcome {
+    text-align: center;
+    font-size: 42px;
+    font-weight: 800;
+}
+
+.recently_add_title {
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.all_products_link {
+    margin-top: 1vh;
+    margin-bottom: 2vh;
+    text-align: center;
+}
+
+.all_products_link > a {
+    padding: 6px 15px;
+    border: 3px solid black;
+    border-radius: 10px;
+    font-weight: bold;
+    color: black;
+}
+
+.all_products_link > a:hover {
+    background-color: #c7c7c7;
+    color: white;
+    border: 3px solid black;
+    text-decoration: none;
+}
+
+.main_item_link {
+    display: inline-block;
+    width: 60%;
+    text-decoration: none;
+    padding-top: .5vw;
+    padding-bottom: .5vw;
+    margin-left: 20%;
+}
+
+.main_item_link:hover {
+    text-decoration: none;
+    color: black;
+    background-color: #c7c7c7;
+    color: white;
+}
+
+.main_index_image {
+    display: inline;
+    max-width: 15%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.main_index_title {
+    display: inline-flex;
+    font-weight: bold;
+    color: black;
+    width: 55%;
+}
+
+.main_index_price {
+    display: inline-flex;
+    font-weight: bold;
+    color: black;
+    width: 23%;
+}
+
+.user_welcome {
+    text-align: center;
+}
 
 .cart_image {
-    max-height: 4vw;
+    max-height: 40px;
     position: absolute;
     right: 0px;
     top: 0px;
@@ -8,7 +86,7 @@
 }
 
 .bangazon_logo {
-    max-width: 40vw;
+    max-width: 20vw;
     display: flex;
     margin: auto;
 }
@@ -79,26 +157,26 @@
 }
 
 .cart_image_title {
-    width: 15vw;
+    width: 8vw;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .cart_item_image {
-    width: 15vw;
-    max-height: 15vw;
+    max-width: 8vw;
+    max-height: 8vw;
 }
 
 .cart_title {
-    width: 30vw;
+    width: 22vw;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .cart_description {
-    width: 45vw;
+    width: 52vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -112,7 +190,118 @@
     text-align: center;
 }
 
+.cart_total_title {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.cart_total_section {
+    width: 30vw;
+    margin-left: 35vw;
+    background-color: #c7c7c7;
+    padding: 1%;
+    font-weight: 700;
+    margin-bottom: 50px;
+}
+
+.indiv_section_cart {
+    display: inline-flex;
+    width: 100%;
+}
+
+.cart_total_label {
+    margin: 0px;
+    width: 60%;
+}
+
+.cart_total_count {
+    margin: 0px;
+    width: 38%;
+    text-align: center;
+}
+
+.cart_total_price {
+    margin: 0px;
+    width: 38%;
+    text-align: center;
+}
+
+.cart_total_tax {
+    margin: 0px;
+    width: 38%;
+    text-align: center;
+}
+
+.cart_total_with_tax {
+    margin: 0px;
+    width: 38%;
+    text-align: center;
+}
+
+.cart_icon {
+    width: 3%;
+    margin: auto;
+    margin-right: 1%;
+}
+
+.cart_icon_image {
+    width: 100%
+}
+
 button a {
     color: white;
     text-decoration: none;
+}
+
+
+/* Styling for All Products List */
+.main_title {
+    text-align: center;
+    font-weight: 900;
+}
+
+.main_product_list {
+    width: 90vw;
+    margin: auto;
+}
+
+.list_products {
+    display: inline-block;
+    width: 100%;
+    border: 3px solid;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: black;
+    padding-left: 5vw;
+}
+
+.list_products:hover {
+    background-color: #c7c7c7;
+    color: white;
+    border: 3px solid black;
+    border-radius: 10px;
+}
+
+.all_image {
+    max-width: 10vw;
+}
+
+.all_list_title {
+    display: inline-block;
+    width: 45vw;
+    margin: 0px;
+    margin-left: 3vw;
+    vertical-align: middle;
+    font-weight: 700;
+}
+
+.all_list_price {
+    display: inline-block;
+    width: 20vw;
+    margin: 0px;
+    margin-left: 5vw;
+    vertical-align: middle;
+    font-weight: 700;
 }

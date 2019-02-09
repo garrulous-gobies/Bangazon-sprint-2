@@ -1,20 +1,16 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Bangazon</title>
-  </head>
-  <body>
-    <h1>Products</h1>
+{% extends "index.html" %}
 
-    <ol>
+{% block content %}
+
+<h1 class="main_title">All Products</h1>
+<article class="main_product_list">
     {% for product in products %}
-    <a href="{% url 'website:product_details' %}">
-        {{ product.title }}
-    </a>
+        <a class="list_products" href="{% url 'website:product_details' product.id%}">
+            <img class="all_image" src={{product.image}} alt={{product.title}}>
+            <p class="all_list_title">{{ product.title }}</p>
+            <p class="all_list_price">Price:  ${{product.price}}</p>
+        </a>
     {% endfor %}
-    </ol>
-  </body>
-</html>
+</article>
 
+{% endblock content %}
