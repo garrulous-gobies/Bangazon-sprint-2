@@ -40,8 +40,34 @@ def profile(request, pk):
 
 def edit_profile(request, pk):
 
-    profile_form = ProfileForm()
-    customer_form = CustomerForm()
+    with connection.cursor() as cursor:
+            try:
+                cursor.execute(f'''SELECT * FROM auth_user JOIN website_customer ON auth_user.id = website_customer.user_id WHERE auth_user.id = {pk}
+                            ''')
+                
+                columns = [col[0] for col in cursor.description]
+
+                profile = dict()
+
+                for row in cursor.fetchall():
+                    to_add = dict(zip(columns, row))
+                    profile.update(to_add)
+
+            except connection.OperationalError as err:
+                print("Error...", err)
+
+    profile_form = ProfileForm(
+        initial={
+            'first_name': profile['first_name'],
+            'last_name': profile['last_name']
+        }
+    )
+    customer_form = CustomerForm(
+        initial={
+            'address': profile['address'],
+            'phoneNumber': profile['phoneNumber']
+        }
+    )
 
     context = {"profile_form": profile_form, "customer_form": customer_form}
 
