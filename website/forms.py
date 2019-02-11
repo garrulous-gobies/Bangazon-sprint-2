@@ -18,7 +18,13 @@ class CustomerForm(forms.ModelForm):
 
 
 class ProductForm(forms.ModelForm):
-    # generate a tuple of tuples to populate the dropdown field with product categories
+    """Form class for a user adding a new prodcut to sell
+
+    Author(s): Nolan Little
+
+    """
+
+    # generate a tuple of tuples to populate the dropdown field with product categories.
     def get_categories():
         sql = 'SELECT id, productCategory FROM website_producttype'
         product_types = ProductType.objects.raw(sql, None)

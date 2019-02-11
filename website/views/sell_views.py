@@ -12,6 +12,20 @@ from website.forms import UserForm, ProductForm
 
 
 def sell_product(request):
+    """Handles displaying, validating, and posting the new product form
+
+    Author(s): Nolan Little
+
+    Arguments:
+        request {request object}
+
+    Returns:
+        render -- if the request is a get, returns a render of the form
+               -- if the request is a post, checks the validity of the form data
+               -- if the data is valid, performs the db insert of new item and returns a render
+                    of the details view of the new items
+    """
+
     if request.method == 'GET':
         product_form = ProductForm()
         template_name = 'product/create.html'
