@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<section>
+    <ul>
+        {% for option in payment_types %}
+        <li>{{option.paymentCategory}} ------- {{option.accountNumber}}</li>
+        {% endfor %}
+    </ul>
+</section>
+
+{% endblock content %}

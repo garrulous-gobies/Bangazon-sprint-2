@@ -16,6 +16,6 @@ urlpatterns = [
     url(r'^cart/remove/(?P<order_id>\d+)/$', views.remove_from_cart, name="remove_from_cart"),
     url(r'^categories$', views.categories, name="categories"),
     url(r'^profile/(?P<pk>\d+)/$', views.profile, name="profile"),
-    url(r'^profile/(?P<pk>\d+)/add_payment_option$', views.add_payment, name="add_payment")
-
+    url(r'^profile/(?P<pk>\d+)/add_payment_option$', views.add_payment, name="add_payment"),
+    url(r'^cart/(?P<pk>\d+)/select_payment$', views.select_payment, name="select_payment")
 ]

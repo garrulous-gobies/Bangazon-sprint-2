@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.template import RequestContext
 from django.urls import reverse
 from website.forms import UserForm, ProductForm
-from website.models import Order, ProductOrder, Product
+from website.models import Order, ProductOrder, Product, PaymentMethod
 import sqlite3
 from decimal import *
 
@@ -52,3 +52,14 @@ def add_to_cart(request, product_id):
 def remove_from_cart(request, order_id):
     ProductOrder.objects.filter(id=order_id).update(deleted=1)
     return HttpResponseRedirect(reverse('website:cart'))
+
+def select_payment(request, pk):
+    sql = """ SELECT *
+              FROM website_paymentmethod pm
+              JOIN website_paymenttype pt
+              ON pm.paymentName_id = pt.id
+              WHERE customerPayment_id = %s
+    """
+    payment_types= PaymentMethod.objects.raw(sql, [pk,])
+    context = {"payment_types": payment_types}
+    return render(request, 'complete_order.html', context)
