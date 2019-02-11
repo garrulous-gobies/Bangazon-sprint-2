@@ -7,7 +7,7 @@ from django.template import RequestContext
 from website.forms import UserForm, ProductForm
 from website.models import Product
 from django.db import connection
-from website.forms import ProfileForm
+from website.forms import ProfileForm, CustomerForm
 from django.urls import reverse
 
 def profile(request, pk):
@@ -41,25 +41,9 @@ def profile(request, pk):
 def edit_profile(request, pk):
 
     profile_form = ProfileForm()
+    customer_form = CustomerForm()
 
-    with connection.cursor() as cursor:
-        try:
-            cursor.execute(f'''SELECT * FROM auth_user JOIN website_customer ON auth_user.id = website_customer.user_id WHERE auth_user.id = {pk}
-                        ''')
-                
-            columns = [col[0] for col in cursor.description]
-
-            profile = dict()
-
-            for row in cursor.fetchall():
-                to_add = dict(zip(columns, row))
-                profile.update(to_add)
-
-        except connection.OperationalError as err:
-            print("Error...", err)
-    
-
-    context = {"profile": profile, "profile_form": profile_form}
+    context = {"profile_form": profile_form, "customer_form": customer_form}
 
     return render(request, 'profile_edit.html', context)
 
@@ -72,9 +56,12 @@ def submit_profile(request, pk):
         'last_name': form_data['last_name']
     }
 
-    customer_id = request.user.id
+    cust_form_data = {
+        'address': form_data['address'],
+        'phoneNumber': form_data['phoneNumber']
+    }
 
-    # TODO: this sql query ONLY INCLUDES first name and last name. Obviously will want to edit more info, so code those in
+    customer_id = request.user.id
 
     sql = "UPDATE auth_user SET first_name=%s, last_name=%s WHERE auth_user.id = %s"
     profile_params = [
@@ -83,10 +70,19 @@ def submit_profile(request, pk):
         customer_id
     ]
 
+    sql2 = "UPDATE website_customer SET address=%s, phoneNumber=%s WHERE user_id = %s"
+    customer_params = [
+        cust_form_data['address'],
+        cust_form_data['phoneNumber'],
+        customer_id
+    ]
+
     print(profile_params)
+    print(customer_params)
 
     with connection.cursor() as cursor:
         cursor.execute(sql, profile_params)
+        cursor.execute(sql2, customer_params)
 
 
     return HttpResponseRedirect(reverse('website:profile', args=(pk,)))
