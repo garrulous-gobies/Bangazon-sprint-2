@@ -60,7 +60,7 @@ class OrderHistoryTests(TestCase):
     Author(s): Nolan Little
     """
 
-    def test_order_history_context(self):
+    def test_order_history_res(self):
         self.user = User.objects.create_user(username='testuser', password='12345')
         login = self.client.login(username='testuser', password='12345')
         customer = Customer.objects.create(user=self.user, address="test", phoneNumber="test", deleted=0)
@@ -79,3 +79,29 @@ class OrderHistoryTests(TestCase):
         )
         order = Order.objects.create(deleted=0, customerOrder=customer, paymentOrder=payment_method)
         product_order = ProductOrder.objects.create(deleted=0, order=order, product=product)
+
+        response = self.client.get(reverse('website:order_history', kwargs={'pk':self.user.id}))
+        self.assertEqual(response.status_code, 200)
+
+    def test_order_history_detail_res(self):
+        self.user = User.objects.create_user(username='testuser', password='12345')
+        login = self.client.login(username='testuser', password='12345')
+        customer = Customer.objects.create(user=self.user, address="test", phoneNumber="test", deleted=0)
+        category = ProductType.objects.create(productCategory="Toys", deleted = 0)
+        pay_type = PaymentType.objects.create(paymentCategory="credit card", deleted = 0)
+        payment_method = PaymentMethod.objects.create(accountNumber=1, customerPayment=customer, paymentName=pay_type)
+        productType = ProductType.objects.create(productCategory="toys", deleted=0)
+        product = Product.objects.create(
+            title="bike",
+            description="its a bike",
+            price=1.00, quantity=1,
+            image="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1544049078-gifts-for-brothers-jabra-ear-buds-1541438364.jpg?crop=1xw:1xh;center,top&resize=768:*",
+            deleted=0,
+            customer=self.user,
+            productType= productType
+        )
+        order = Order.objects.create(deleted=0, customerOrder=customer, paymentOrder=payment_method)
+        product_order = ProductOrder.objects.create(deleted=0, order=order, product=product)
+
+        response = self.client.get(reverse('website:order_history_details', kwargs={'pk':self.user.id, 'order_id': 1}))
+        self.assertEqual(response.status_code, 200)
