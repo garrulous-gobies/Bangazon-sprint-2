@@ -1,0 +1,10 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+    <h3>Order History</h3>
+    {% for order in user.customer.orders  %}
+    <li>Im an order</li>
+    {% endfor %}
+
+{% endblock content %}
