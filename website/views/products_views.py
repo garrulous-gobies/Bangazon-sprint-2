@@ -66,6 +66,11 @@ def category_list(request, productType_id):
                                           WHERE website_product.productType_id = %s''', [productType_id])
     category = ProductType.objects.raw('''Select * from website_producttype
                                           WHERE website_producttype.id = %s''', [productType_id])[0]
+    for item in all_products:
+        orders = ProductOrder.objects.raw('''SELECT * from website_productOrder p
+                                        WHERE p.product_id = %s AND p.deleted=0''', [item.id])
+        orderCount = len(orders)
+        item.quantityRemaining = item.quantity - orderCount
     print("category",category.productCategory)
     template_name = 'category_list.html'
     return render(request, template_name, {'products': all_products, 'category': category})
