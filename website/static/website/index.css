@@ -139,11 +139,11 @@
     border-radius: 20px;
 }
 
-<<<<<<< HEAD
 button a {
     color: white;
     text-decoration: none;
-=======
+}
+
 .cart_item_labels {
     display: inline-flex;
 }
@@ -309,5 +309,4 @@ button a {
     margin-left: 5vw;
     vertical-align: middle;
     font-weight: 700;
->>>>>>> master
 }
