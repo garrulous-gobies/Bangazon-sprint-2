@@ -3,11 +3,11 @@ from django import forms
 from website.models import Product, Customer, PaymentMethod, PaymentType, ProductType
 
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
-
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'password', 'first_name', 'last_name',)
+        password = forms.CharField(widget=forms.PasswordInput())
+        
+        class Meta:
+            model = User
+            fields = ('username', 'email', 'password', 'first_name', 'last_name',)
 
 class CustomerForm(forms.ModelForm):
 
@@ -94,9 +94,9 @@ class PaymentForm(forms.ModelForm):
             choices.append(item)
 
         return choices
-    
+
     paymentName = forms.ChoiceField(choices=getPaymentType)
-    
+
     class Meta:
         model = PaymentMethod
         fields = ('accountNumber', 'paymentName')
