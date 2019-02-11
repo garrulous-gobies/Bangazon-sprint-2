@@ -1,20 +1,14 @@
 {% extends "index.html" %}
-{% load mathfilters %}
 
 
 {% block content %}
 <section>
     <h3>{{user.username}}'s Payment Options</h3>
-    <ul>
+    <ul class="list-group list-group-flush">
         {% for option in payment_types %}
-        
-        <li> Option: {{option.paymentCategory}}
-            {{option.account_num_length}}
-            {{option.account_num_length|sub:4}}
-            {{option.account_num_length|sub:1}}
-            <li>With Account Number ending in {{option.accountNumber|slugify|slice:"3:5"}}----{{maskedNum}}</li> 
+        <li class="list-group-item"> Option: {{option.paymentCategory}}. <br> With Account Number ending in {{option.Four}}</
         </li>
-        
+        <button class="btn btn-primary select_btn"><a href="#">Select Option</a></button>
 
         {% endfor %}
     </ul>

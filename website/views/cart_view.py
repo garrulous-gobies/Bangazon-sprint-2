@@ -8,6 +8,7 @@ from website.forms import UserForm, ProductForm
 from website.models import Order, ProductOrder, Product, PaymentMethod
 import sqlite3
 from decimal import *
+import re
 
 
 conn = sqlite3.connect('db.sqlite3', check_same_thread=False)
@@ -69,28 +70,14 @@ def remove_from_cart(request, order_id):
     return HttpResponseRedirect(reverse('website:cart'))
 
 def select_payment(request, pk):
-    sql = """ SELECT *, LENGTH(pm.accountNumber) as account_num_length
+    sql = """ SELECT *, substr(pm.accountNumber, -4, 4) as "Four"
               FROM website_paymentmethod pm
               JOIN website_paymenttype pt
               ON pm.paymentName_id = pt.id
               WHERE customerPayment_id = %s
     """
-
-    # sql2="""SELECT LENGTH(pm.accountNumber)
-    #         from website_paymentmethod pm
-    #         WHERE customerPayment_id = %s
-    # """
-
-    payment_types= PaymentMethod.objects.raw(sql, [pk,])
-    # account_num_length = PaymentMethod.objects.raw(sql2, [pk,])
-    for option in payment_types:
-        anum = str(option.accountNumber)
-        strlength = len(anum)
-        masked = strlength - 4
-        slimstr = anum[masked:]
-        print("*", * masked + slimstr)
-        # maskedNum = * masked + slimstr
-        # return maskedNum
+    
+    payment_types= PaymentMethod.objects.raw(sql, [pk,])   
 
     context = {"payment_types": payment_types}
     return render(request, 'complete_order.html', context)

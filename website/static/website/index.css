@@ -318,3 +318,7 @@ button a {
     vertical-align: middle;
     font-weight: 700;
 }
+
+.select_btn {
+    margin-left: 20px;
+}
