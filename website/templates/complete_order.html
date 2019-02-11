@@ -1,11 +1,21 @@
 {% extends "index.html" %}
+{% load mathfilters %}
 
 
 {% block content %}
 <section>
+    <h3>{{user.username}}'s Payment Options</h3>
     <ul>
         {% for option in payment_types %}
-        <li>{{option.paymentCategory}} ------- {{option.accountNumber}}</li>
+        
+        <li> Option: {{option.paymentCategory}}
+            {{option.account_num_length}}
+            {{option.account_num_length|sub:4}}
+            {{option.account_num_length|sub:1}}
+            <li>With Account Number ending in {{option.accountNumber|slugify|slice:"3:5"}}----{{maskedNum}}</li> 
+        </li>
+        
+
         {% endfor %}
     </ul>
 </section>
