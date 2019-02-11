@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django import forms
 from website.models import Product, Customer, PaymentMethod, PaymentType, ProductType
+from django.db import models
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -48,6 +49,11 @@ class ProductForm(forms.ModelForm):
                 'min_value': "Quantity must be at least 1"
             },
         }
+
+class Document(models.Model):
+    description = models.CharField(max_length=255, blank=True)
+    document = models.FileField(upload_to='documents/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
 
 class ProfileForm(forms.ModelForm):
     """Form class for a user editing their personal details
