@@ -1,0 +1,8 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<h1 class="password_match">The password and confirm password entries do not match. Please try to register again.</h1>
+<a class="register_again" href="{% url 'website:register' %}">Try Again</a>
+<a class="register_again" href="{% url 'website:login' %}">Login</a>
+{% endblock %}
