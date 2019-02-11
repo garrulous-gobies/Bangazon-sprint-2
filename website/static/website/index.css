@@ -326,3 +326,22 @@ button a {
 .done_btn {
     margin: 10px 0px 0px 25px;
 }
+
+.complete_order form{
+    margin: 20px;
+}
+.complete_order li{
+    list-style-type: none;
+}
+
+.shop_btn {
+    display: flex; 
+    justify-content: center;
+}
+.text_center {
+    text-align: center;
+}
+
+.lrg-txt {
+    font-size: 1.5rem;
+}

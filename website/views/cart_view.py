@@ -71,8 +71,13 @@ def remove_from_cart(request, order_id):
     return HttpResponseRedirect(reverse('website:cart'))
 
 def select_payment(request, pk):
-    """ This method will return the addPayment form with a list of all payment types belonging to the user. via radio buttons
+    """ Summary: This method will return the addPayment form with a list of all payment types belonging to the user, via radio buttons.
+
+    Model(s): PaymentMethod, PaymentType, Order
+
+    Author(s): Austin Zoradi
     """
+
     sql = """ SELECT *, substr(pm.accountNumber, -4, 4) as "Four"
               FROM website_paymentmethod pm
               JOIN website_paymenttype pt
@@ -88,25 +93,28 @@ def select_payment(request, pk):
         payType = (choice.id, f"{choice.paymentCategory} ending in {choice.Four}")
         card_choices.append(payType)
 
-    print(card_choices)
-    
-    payment_form = addPayment(card_choices=card_choices
-
-    )
+        
+    payment_form = addPayment(card_choices=card_choices)
     context = {"payment_types": payment_types, "payment_form": payment_form }
 
-    
     return render(request, 'complete_order.html', context)
 
 def save_payment(request, pk):
-    card_type = request.POST['payment_type']  
+    """ Summary: This will udate the order in the DB with the value of the radio button chosen (ie the id of the payment type).
 
+    Model(s): PaymentMethod, PaymentType, Order
+
+    Author(s): Austin Zoradi, Zac Jones
+    """
+
+    card_type = request.POST['payment_type'] 
     sql = """UPDATE website_order set paymentOrder_id=%s WHERE website_order.id = %s"""
     sql2 = """SELECT o.id 
               FROM  website_order o
               WHERE o.customerOrder_id=%s
               order by o.id desc
               LIMIT 1 """
+
     order_id = Order.objects.raw(sql2, [request.user.id,])
 
     order_info = []
@@ -116,5 +124,7 @@ def save_payment(request, pk):
     with connection.cursor() as cursor:
         cursor.execute(sql, [card_type, o_id.id])
 
-    return HttpResponseRedirect(reverse('website:cart'))
+    return render(request, "order_conf.html", {})
+
+
     
