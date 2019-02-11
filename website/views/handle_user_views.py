@@ -1,5 +1,6 @@
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.template import RequestContext
@@ -24,17 +25,27 @@ def register(request):
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
         customer_form = CustomerForm(data=request.POST)
+        confirm_password = request.POST['confirm_password']
+        newPassword = request.POST.get('password')
         if user_form.is_valid() and customer_form.is_valid():
-            user = user_form.save()
-            customer = customer_form.save()
-            customer.user = user
-            user.set_password(user.password)
-            user.save()
-            customer.save()
-            return login_user(request)
+            if newPassword == confirm_password:
+                user = user_form.save()
+                customer = customer_form.save()
+                customer.user = user
+                user.set_password(user.password)
+                user.save()
+                customer.save()
+                return login_user(request)
+            else:
 
+                # print("user form", newPassword)
+                # print("confirm", confirm_password)
+                print("passwords don't match")
+                template_name = 'error.html'
+                return render(request, template_name)
         else:
             print("not valid user form")
+
 
     elif request.method == 'GET':
         user_form = UserForm()
