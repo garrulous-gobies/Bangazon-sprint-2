@@ -5,7 +5,19 @@ from decimal import Decimal
 
 
 def order_history(request, pk):
+    """A list of the users orders
 
+    Author(s): Nolan Little
+
+    Arguments:
+        request {object} -- request object
+        pk {int} -- user id
+
+    template: 'order_history.html'
+
+    Returns:
+        render -- 'order_history.html'
+    """
     get_user_sql = '''
         SELECT * FROM auth_user
         WHERE id = %s
@@ -31,6 +43,21 @@ def order_history(request, pk):
 
 
 def order_history_details(request, pk, order_id):
+    """Details of past order in users order history
+
+    Author(s): Nolan Little
+
+    Arguments:
+        request {object} -- request object
+        pk {int} -- user id
+        order_id {int} -- id of order
+
+    template: 'order_history_detail.html'
+
+    Returns:
+        render -- 'order_history_detail.html'
+    """
+
     get_single_order_sql = '''
         SELECT * FROM website_order
         WHERE customerOrder_id = %s AND id = %s
