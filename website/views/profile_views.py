@@ -20,42 +20,46 @@ def profile(request, pk):
     """
     
     with connection.cursor() as cursor:
-            try:
-                cursor.execute(f'''SELECT * FROM auth_user JOIN website_customer ON auth_user.id = website_customer.user_id WHERE auth_user.id = {pk}
-                            ''')
+        try:
+            cursor.execute(f'''SELECT * FROM auth_user JOIN website_customer ON auth_user.id = website_customer.user_id WHERE auth_user.id = {pk}
+                        ''')
                 
-                columns = [col[0] for col in cursor.description]
+            columns = [col[0] for col in cursor.description]
 
-                profile = dict()
+            profile = dict()
 
-                for row in cursor.fetchall():
-                    to_add = dict(zip(columns, row))
-                    profile.update(to_add)
+            for row in cursor.fetchall():
+                to_add = dict(zip(columns, row))
+                profile.update(to_add)
 
-            except connection.OperationalError as err:
-                print("Error...", err)
+        except connection.OperationalError as err:
+            print("Error...", err)
     
     context = {"profile": profile}
 
     return render(request, 'profile.html', context)
 
 def edit_profile(request, pk):
+    """ Handles edit form, sets initial value to current values from database
+
+    Author(s): Zac Jones
+    """
 
     with connection.cursor() as cursor:
-            try:
-                cursor.execute(f'''SELECT * FROM auth_user JOIN website_customer ON auth_user.id = website_customer.user_id WHERE auth_user.id = {pk}
-                            ''')
+        try:
+            cursor.execute(f'''SELECT * FROM auth_user JOIN website_customer ON auth_user.id = website_customer.user_id WHERE auth_user.id = {pk}
+                        ''')
                 
-                columns = [col[0] for col in cursor.description]
+            columns = [col[0] for col in cursor.description]
 
-                profile = dict()
+            profile = dict()
 
-                for row in cursor.fetchall():
-                    to_add = dict(zip(columns, row))
-                    profile.update(to_add)
+            for row in cursor.fetchall():
+                to_add = dict(zip(columns, row))
+                profile.update(to_add)
 
-            except connection.OperationalError as err:
-                print("Error...", err)
+        except connection.OperationalError as err:
+            print("Error...", err)
 
     profile_form = ProfileForm(
         initial={
@@ -75,6 +79,13 @@ def edit_profile(request, pk):
     return render(request, 'profile_edit.html', context)
 
 def submit_profile(request, pk):
+    """ Handles submission of the user's information form
+    
+    Arguments:
+        pk
+
+    Author(s): Zac Jones
+    """
 
     form_data = request.POST
 
@@ -103,9 +114,6 @@ def submit_profile(request, pk):
         cust_form_data['phoneNumber'],
         customer_id
     ]
-
-    print(profile_params)
-    print(customer_params)
 
     with connection.cursor() as cursor:
         cursor.execute(sql, profile_params)

@@ -3,7 +3,6 @@
 {% block content %}
 
     <h1>Edit your info</h1>
-<!-- one more argument in URL for ID! -->
     <form action="{% url 'website:submit_profile' user.id %}" method="post">
         {% csrf_token %}
         {{ profile_form.as_p }}
