@@ -58,5 +58,14 @@ def product_details(request, product_id):
     quantity = product.quantity - orderCount
     product.quantity = quantity
     template_name = 'product_details.html'
-    # print('product.id:', product_id)
     return render(request, template_name, {'product': product, 'product_id': product_id})
+
+
+def category_list(request, productType_id):
+    all_products = Product.objects.raw('''SELECT * from website_product
+                                          WHERE website_product.productType_id = %s''', [productType_id])
+    category = ProductType.objects.raw('''Select * from website_producttype
+                                          WHERE website_producttype.id = %s''', [productType_id])[0]
+    print("category",category.productCategory)
+    template_name = 'category_list.html'
+    return render(request, template_name, {'products': all_products, 'category': category})
