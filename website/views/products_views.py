@@ -5,11 +5,11 @@ from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
 
 from website.forms import UserForm, ProductForm
-from website.models import Product, ProductType
+from website.models import *
 
 
 def list_products(request):
-    all_products = Product.objects.all()
+    all_products = Product.objects.raw("SELECT * from website_product")
     template_name = 'product/list.html'
     return render(request, template_name, {'products': all_products})
 
@@ -43,8 +43,15 @@ def categories(request):
     
     context = {"all_productTypes": all_productTypes, "limit_products_list": limit_products_list}
     return render(request, 'categories.html', context)
-    
+
 def product_details(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
+    product = Product.objects.raw('''SELECT * from website_product p
+                                            WHERE p.id = %s''', [product_id])[0]
+    orders = ProductOrder.objects.raw('''SELECT * from website_productOrder p
+                                        WHERE p.product_id = %s AND p.deleted=0''', [product_id])
+    orderCount = len(orders)
+    quantity = product.quantity - orderCount
+    product.quantity = quantity
     template_name = 'product_details.html'
-    return render(request, template_name, {'product': product})
+    # print('product.id:', product_id)
+    return render(request, template_name, {'product': product, 'product_id': product_id})
