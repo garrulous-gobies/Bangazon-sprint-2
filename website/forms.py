@@ -18,7 +18,13 @@ class CustomerForm(forms.ModelForm):
 
 
 class ProductForm(forms.ModelForm):
-    # generate a tuple of tuples to populate the dropdown field with product categories
+    """Form class for a user adding a new prodcut to sell
+
+    Author(s): Nolan Little
+
+    """
+
+    # generate a tuple of tuples to populate the dropdown field with product categories.
     def get_categories():
         sql = 'SELECT id, productCategory FROM website_producttype'
         product_types = ProductType.objects.raw(sql, None)
@@ -42,6 +48,32 @@ class ProductForm(forms.ModelForm):
                 'min_value': "Quantity must be at least 1"
             },
         }
+
+class ProfileForm(forms.ModelForm):
+    """Form class for a user editing their personal details
+
+    References User model
+
+    Author(s): Zac Jones
+
+    """
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name',)
+
+class CustomerForm(forms.ModelForm):
+    """Form class for a user editing their address and phone
+
+    References Customer model
+
+    Author(s): Zac Jones
+
+    """
+
+    class Meta:
+        model = Customer
+        fields = ('address', 'phoneNumber',)
 
 class PaymentForm(forms.ModelForm):
     def getPaymentType():
