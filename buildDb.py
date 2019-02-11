@@ -6,6 +6,23 @@ c = conn.cursor()
 
 
 
+c.execute('''INSERT INTO auth_user VALUES (
+            1,
+            "Default Password",
+            "2000-01-01 01:01:01",
+            0,
+            "Default Username",
+            "First Name",
+            "Default email",
+            0,
+            0,
+            "2000-01-01 01:01:01",
+            "Last Name")''')
+c.execute('''INSERT INTO website_customer VALUES (
+            1,
+            "Default User Address",
+            "000-000-0000",
+            0)''')
 c.execute('''INSERT INTO website_product VALUES (
             1,
             "Jabra Elite Active 65t",
@@ -261,7 +278,7 @@ c.execute('''INSERT INTO website_productType Values (
 c.execute('''INSERT INTO website_order Values (
             1,
             0,
-            1,
+            2,
             1)''')
 c.execute('''INSERT INTO website_productOrder Values (
             1,
@@ -275,23 +292,27 @@ c.execute('''INSERT INTO website_productOrder Values (
             6)''')
 c.execute('''INSERT INTO website_paymenttype VALUES (
              1,
-            "Credit Card",
+            "None",
              0)''')
 c.execute('''INSERT INTO website_paymenttype VALUES (
              2,
-            "Debit Card",
+            "Credit Card",
              0)''')
 c.execute('''INSERT INTO website_paymenttype VALUES (
              3,
-            "Gift Card",
+            "Debit Card",
              0)''')
 c.execute('''INSERT INTO website_paymenttype VALUES (
              4,
+            "Gift Card",
+             0)''')
+c.execute('''INSERT INTO website_paymenttype VALUES (
+             5,
             "Gold Bullion",
              0)''')
 c.execute('''INSERT INTO website_paymentmethod VALUES (
-             Null,
-             123412341234,
+             1,
+             0,
              0,
              1,
              1)''')
@@ -299,7 +320,7 @@ c.execute('''INSERT INTO website_paymentmethod VALUES (
              Null,
              999999999,
              0,
-             1,
+             2,
              4)''')
 
 conn.commit()
