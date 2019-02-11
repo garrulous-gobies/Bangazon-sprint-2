@@ -1,6 +1,46 @@
 {% extends "index.html" %}
+{% load staticfiles %}
 
 {% block content %}
-<p> {{cart}}</p>
+<h1 class="cart_main_title">Your Bangazon Cart</h1>
+<section class="cart_item_labels">
+    <p class="cart_image_title">Product</p>
+    <p class="cart_title">Name</p>
+    <p class="cart_description">Description</p>
+    <p class="cart_price">Price Per Item</p>
+</section>
+{% for product in products_in_cart %}
+<section class="cart_item">
+    <img class="cart_item_image" src={{product.image}} alt={{product.title}}>
+    <p class="cart_title"> {{product.title}}</p>
+    <p class="cart_description"> {{product.description}}</p>
+    <p class="cart_price"> ${{product.price}}</p>
+    <a class="cart_icon" href="{% url 'website:remove_from_cart' product.order_id %}">
+            <img class="cart_icon_image" src="{% static 'website/trash.png' %}" alt="Remove Item">
+    </a>
+    <a class="cart_icon" href="{% url 'website:add_to_cart' product.id %}">
+            <img class="cart_icon_image" src="{% static 'website/add.png' %}" alt="Add Item">
+    </a>
+</section>
+{% endfor %}
+<p class="cart_total_title">Cart Total</p>
+<section class="cart_total_section">
+    <section class="indiv_section_cart">
+        <p class="cart_total_label">Items In Cart</p>
+        <p class="cart_total_count">{{count}}</p>
+    </section>
+    <section class="indiv_section_cart">
+        <p class="cart_total_label">Cost of Items</p>
+        <p class="cart_total_price"> ${{total}}</p>
+    </section>
+    <section class="indiv_section_cart">
+        <p class="cart_total_label">Tax (9.45%)</p>
+        <p class="cart_total_tax"> ${{tax}}</p>
+    </section>
+    <section class="indiv_section_cart">
+        <p class="cart_total_label">Total Price</p>
+        <p class="cart_total_with_tax"> ${{total_with_tax}}</p>
+    </section>
+</section>
 
 {% endblock content %}

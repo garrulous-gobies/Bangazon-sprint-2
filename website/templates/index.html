@@ -20,25 +20,26 @@
     {% endblock nav %}
 
     {% block content %}
-    <h1>Welcome to Bangazon!</h1>
     {% if user.is_authenticated %}
-    <h1>Bangazon says... hello {{ user.username }}!</h1>
-    <a href="{% url 'website:logout' %}">Logout</a>
+    <img class="bangazon_logo" src="{% static 'website/bangazon2icon.png' %}" alt="Bangazon Logo">
+    <h1 class="user_welcome">Welcome {{ user.username }}!</h1>
     {% else %}
-    <img class="bangazon_logo" src="{% static './../../../static/website/bangazon2icon.png' %}" alt="Bangazon Logo">
-    <h1>Bangazon says...</h1>
+    <h1>Welcome to Bangazon!</h1>
+    <img class="bangazon_logo" src="{% static 'website/bangazon2icon.png' %}" alt="Bangazon Logo">
+    <h1>Let's Get Started</h1>
     <div><a href="{% url 'website:register' %}">Register</a></div>
     <div><a href="{% url 'website:login' %}">Login</a></div>
     {% endif %}
 
-    <h1>Latest Products</h1>
-    <ul>
-        {% for product in products %}
-        <a href="{% url 'website:product_details' product.id %}">
-            {{ product.title }} <br>
+    <h1 class="recently_add_title">Recently Added Products</h1>
+    <p class="all_products_link"><a  href="{% url 'website:list_products' %}">View All Products</a></p>
+    {% for product in products %}
+    <a class="main_item_link" href="{% url 'website:product_details' product.id%}">
+            <img class="main_index_image" src={{product.image}} alt={{product.title}}>
+            <p class="main_index_title">{{ product.title }}</p>
+            <p class="main_index_price">Price:  ${{product.price}}</p>
         </a>
-        {% endfor %}
-    </ul>
+    {% endfor %}
 
     {% endblock content %}
     <!-- Optional JavaScript -->

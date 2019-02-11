@@ -4,10 +4,10 @@
 <p class="product_title"> {{product.title}}</p>
 <img class="product_image" src={{product.image}} alt={{product.title}}></img>
 <p class="product_description"> {{product.description}}<br></p>
-<p class="product_price">Price: {{product.price}}</p>
+<p class="product_price">Price: ${{product.price}}</p>
 <p class="product_quantity">Quantity Available: {{product.quantity}}</p>
 <!-- href needs changed to add item to cart -->
-<a class="add_to_cart" href="{% url 'website:product_details' product.id %}">
+<a class="add_to_cart" href="{% url 'website:add_to_cart' product_id %}">
     Add To Cart
 </a>
 {% endblock content %}

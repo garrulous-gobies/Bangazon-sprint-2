@@ -3,8 +3,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.template import RequestContext
+from django.urls import reverse
 
-from website.forms import UserForm, ProductForm
+from website.forms import UserForm, ProductForm, PaymentForm
 from website.models import Product
 from django.db import connection
 from website.forms import ProfileForm, CustomerForm
@@ -112,6 +113,43 @@ def submit_profile(request, pk):
 
 
     return HttpResponseRedirect(reverse('website:profile', args=(pk,)))
+
+def add_payment(request, pk):
+    """[summary]
+    
+    Arguments:
+        request {[type]} -- [description]
+        pk {[type]} -- [description]
+
+    Author(s): Austin Zoradi
+    """
+    if request.method == 'GET':
+        payment_form = PaymentForm()
+        context = {"payment_form": payment_form}
+        return render(request, 'new_payment.html', context)
+
+    elif request.method == 'POST':
+        form_data = request.POST
+        pt_form_data = {
+          "accountNumber": form_data["accountNumber"],
+          "paymentName": form_data["paymentName"] 
+        }
+
+
+        # customer_id = request.user.id
+        sql = "INSERT INTO website_paymentmethod VALUES (%s,%s,%s,%s,%s)"
+        payment_params = [
+            None,
+            pt_form_data['accountNumber'],
+            0,
+            pk,
+            pt_form_data["paymentName"]
+        ]
+        
+        with connection.cursor() as cursor:
+            cursor.execute(sql, payment_params)
+
+        return render(request, 'profile.html', {})
 
   
     
