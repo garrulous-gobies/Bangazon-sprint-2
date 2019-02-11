@@ -26,7 +26,7 @@
     <h3>Order History</h3>
 
         <ul>
-            <li>Here is where order history will be listed.</li>
+            <li><a href="{% url 'website:order_history' user.id %}">View Order History</a></li>
         </ul>
 
 {% endblock content %}
