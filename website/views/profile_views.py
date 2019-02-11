@@ -18,12 +18,12 @@ def profile(request, pk):
     Template: profile.html
     Author(s): Zac Jones
     """
-    
+
     with connection.cursor() as cursor:
         try:
             cursor.execute(f'''SELECT * FROM auth_user JOIN website_customer ON auth_user.id = website_customer.user_id WHERE auth_user.id = {pk}
                         ''')
-                
+
             columns = [col[0] for col in cursor.description]
 
             profile = dict()
@@ -34,7 +34,7 @@ def profile(request, pk):
 
         except connection.OperationalError as err:
             print("Error...", err)
-    
+
     context = {"profile": profile}
 
     return render(request, 'profile.html', context)
@@ -49,7 +49,7 @@ def edit_profile(request, pk):
         try:
             cursor.execute(f'''SELECT * FROM auth_user JOIN website_customer ON auth_user.id = website_customer.user_id WHERE auth_user.id = {pk}
                         ''')
-                
+
             columns = [col[0] for col in cursor.description]
 
             profile = dict()
@@ -80,7 +80,7 @@ def edit_profile(request, pk):
 
 def submit_profile(request, pk):
     """ Handles submission of the user's information form
-    
+
     Arguments:
         pk
 
@@ -124,7 +124,7 @@ def submit_profile(request, pk):
 
 def add_payment(request, pk):
     """[summary]
-    
+
     Arguments:
         request {[type]} -- [description]
         pk {[type]} -- [description]
@@ -140,7 +140,7 @@ def add_payment(request, pk):
         form_data = request.POST
         pt_form_data = {
           "accountNumber": form_data["accountNumber"],
-          "paymentName": form_data["paymentName"] 
+          "paymentName": form_data["paymentName"]
         }
 
 
@@ -153,11 +153,11 @@ def add_payment(request, pk):
             pk,
             pt_form_data["paymentName"]
         ]
-        
+
         with connection.cursor() as cursor:
             cursor.execute(sql, payment_params)
 
-        return render(request, 'profile.html', {})
+        return HttpResponseRedirect(reverse('website:profile',args=(pk,)))
 
-  
-    
+
+

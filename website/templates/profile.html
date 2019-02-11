@@ -21,12 +21,14 @@
             <li>Here is where payment options will be listed.</li>
         </ul>
 
-        <button class="btn btn-primary"><a href="{% url 'website:add_payment' user.id %}"  >Add Payment Type</a></button>
+        <button class="btn btn-primary">
+            <a href="{% url 'website:add_payment' user.id %}"  >Add Payment Type</a>
+        </button>
 
-    <h3>Order History</h3>
-
-        <ul>
-            <li><a href="{% url 'website:order_history' user.id %}">View Order History</a></li>
-        </ul>
+        <div class="mt-3">
+            <button class="btn btn-primary">
+                <a href="{% url 'website:order_history' user.id %}">View Order History</a>
+            </button>
+        </div>
 
 {% endblock content %}

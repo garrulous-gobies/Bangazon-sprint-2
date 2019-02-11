@@ -2,17 +2,43 @@
 
 {% block content %}
 
-    <h3>Order {{order.id}} details</h3>
-        <ul>
-        {% for product_order in order.productorder_set.all %}
-                <li>{{product_order.product.title}} -- {{product_order.product.price}}</li>
-        {% endfor %}
-        </ul>
-        <ul>
-            <li>sub_total: {{order_total.sub_total}}</li>
-            <li>tax: {{order_total.tax}}</li>
-            <li>total: {{order_total.total}}</li>
-        </ul>
+        <div class="container">
+            <h3>Order {{order.id}} details</h3>
+            <div class="row">
+                <div class="col-sm">
+                    <h5>Products in Order</h5>
+                    <ul class="list-group list-group-flush">
+                    {% for product_order in order.productorder_set.all %}
+                            <li class="list-group-item">{{product_order.product.title}} -- {{product_order.product.price}}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-sm">
+                    <h5>Payment Details</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item row">
+                            <span class="col-sm">Payment Method:</span>
+                            <span class="col-sm">{{star_chars}}{{truncated_acct_num}}</span>
+                        </li>
+                        <li class="list-group-item row">
+                            <span class="col-sm">Total Before Tax:</span>
+                            <span class="col-sm">{{order_total.sub_total}}</span>
+                        </li>
+                        <li class="list-group-item row">
+                            <span class="col-sm">Estimated Tax To Be Collected:</span>
+                            <span class="col-sm"> {{order_total.tax}}</span>
+                        </li>
+                        <li class="list-group-item row">
+                            <span class="col-sm">Grand Total:</span>
+                            <span class="col-sm">{{order_total.total}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <button class="btn btn-primary">
+                <a href="{% url 'website:order_history' user.id %}">View Order History</a>
+            </button>
+        </div>
 
 
 {% endblock content %}
