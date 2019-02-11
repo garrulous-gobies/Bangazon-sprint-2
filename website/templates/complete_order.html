@@ -4,14 +4,11 @@
 {% block content %}
 <section>
     <h3>{{user.username}}'s Payment Options</h3>
-    <ul class="list-group list-group-flush">
-        {% for option in payment_types %}
-        <li class="list-group-item"> Option: {{option.paymentCategory}}. <br> With Account Number ending in {{option.Four}}</
-        </li>
-        <button class="btn btn-primary select_btn"><a href="#">Select Option</a></button>
-
-        {% endfor %}
-    </ul>
+    <form action="{% url 'website:save_payment' user.id %}" method="post" >
+        {% csrf_token %}
+        {{ payment_form }}
+        <input type="submit" class="btn btn-primary">
+    </form>
 </section>
 
 {% endblock content %}

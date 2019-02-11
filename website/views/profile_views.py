@@ -161,7 +161,7 @@ def add_payment(request, pk):
         with connection.cursor() as cursor:
             cursor.execute(sql, payment_params)
 
-        return render(request, 'profile.html', {})
+        return HttpResponseRedirect(reverse('website:profile',args=(pk,)))
 
   
     

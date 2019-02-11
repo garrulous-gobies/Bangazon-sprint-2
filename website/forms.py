@@ -93,3 +93,33 @@ class PaymentForm(forms.ModelForm):
     class Meta:
         model = PaymentMethod
         fields = ('accountNumber', 'paymentName')
+
+class addPayment(forms.Form):
+    def __init__(self, **kwargs):
+        card_choices = kwargs.pop('card_choices')
+        super(addPayment, self).__init__(**kwargs)
+        self.fields['payment_type'] =  forms.CharField(label="Payment Option", widget=forms.RadioSelect(choices=card_choices))
+
+
+    # cards = [("visa", "Visa"), ("ms", "MasterCard"), ("bt","Brendon's Tears")]
+    # payment_options = forms.CharField(label="Payment Option", widget=forms.RadioSelect(choices=cards))
+
+    # def paymentOptions():
+        # sql = """ SELECT *, substr(pm.accountNumber, -4, 4) as "Four"
+        #       FROM website_paymentmethod pm
+        #       JOIN website_paymenttype pt
+        #       ON pm.paymentName_id = pt.id
+        #       WHERE customerPayment_id = %s
+        # """
+        
+        # payment_types= PaymentMethod.objects.raw(sql, [user.id,]) 
+        # choices = []
+
+        # return payment_types
+
+
+    # paymentType = forms.ChoiceField(choices=paymentOptions)
+
+    # class Meta:
+    #     model = PaymentMethod
+    #     fields = ('accountNumber', 'paymentType')

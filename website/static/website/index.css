@@ -322,3 +322,7 @@ button a {
 .select_btn {
     margin-left: 20px;
 }
+
+.done_btn {
+    margin: 10px 0px 0px 25px;
+}
