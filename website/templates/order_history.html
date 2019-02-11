@@ -4,13 +4,9 @@
 
     <h3>Order History</h3>
     {% for order in orders  %}
-        <h5><a href="{% url 'website:order_history_details' user.id order.id %}">Order ID#: {{order.id}}</a></h5>
-        {% for product_order in order.productorder_set.all %}
-            <ul>
-                <li>{{product_order.product.title}}
-            </ul>
-        {% endfor %}
-
+        <h5>
+            <a href="{% url 'website:order_history_details' user.id order.id %}">Order ID#: {{order.id}}</a>
+        </h5>
     {% endfor %}
 
 {% endblock content %}

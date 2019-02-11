@@ -3,7 +3,16 @@
 {% block content %}
 
     <h3>Order {{order.id}} details</h3>
-
+        <ul>
+        {% for product_order in order.productorder_set.all %}
+                <li>{{product_order.product.title}} -- {{product_order.product.price}}</li>
+        {% endfor %}
+        </ul>
+        <ul>
+            <li>sub_total: {{order_total.sub_total}}</li>
+            <li>tax: {{order_total.tax}}</li>
+            <li>total: {{order_total.total}}</li>
+        </ul>
 
 
 {% endblock content %}
