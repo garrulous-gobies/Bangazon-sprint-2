@@ -19,5 +19,6 @@ urlpatterns = [
     url(r'^profile/(?P<pk>\d+)/add_payment_option$', views.add_payment, name="add_payment"),
     url(r'^profile/(?P<pk>\d+)/order_history$', views.order_history, name="order_history"),
     url(r'^profile/(?P<pk>\d+)/order_history/(?P<order_id>\d+)/$', views.order_history_details, name="order_history_details"),
-
+    url(r'^profile/(?P<pk>\d+)/edit/$', views.edit_profile, name="edit_profile"),
+    url(r'^profile/(?P<pk>\d+)/edit/submit/$', views.submit_profile, name="submit_profile")
 ]

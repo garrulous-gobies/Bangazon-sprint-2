@@ -49,6 +49,32 @@ class ProductForm(forms.ModelForm):
             },
         }
 
+class ProfileForm(forms.ModelForm):
+    """Form class for a user editing their personal details
+
+    References User model
+
+    Author(s): Zac Jones
+
+    """
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name',)
+
+class CustomerForm(forms.ModelForm):
+    """Form class for a user editing their address and phone
+
+    References Customer model
+
+    Author(s): Zac Jones
+
+    """
+
+    class Meta:
+        model = Customer
+        fields = ('address', 'phoneNumber',)
+
 class PaymentForm(forms.ModelForm):
     def getPaymentType():
         sql = "SELECT * FROM website_paymenttype"
