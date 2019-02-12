@@ -22,5 +22,7 @@ urlpatterns = [
     url(r'^profile/(?P<pk>\d+)/edit/submit/$', views.submit_profile, name="submit_profile"),
     url(r'^profile/(?P<pk>\d+)/add_payment_option$', views.add_payment, name="add_payment"),
     url(r'^cart/(?P<pk>\d+)/select_payment/submit/$', views.save_payment, name="save_payment"),
+    url(r'^profile/(?P<pk>\d+)/delete_payment_option/(?P<payment_id>\d+)$', views.delete_payment, name="delete_payment"),
+    url(r'^profile/(?P<pk>\d+)/delete_payment_option/(?P<payment_id>\d+)/removed$', views.remove_payment, name="remove_payment")
 
 ]
