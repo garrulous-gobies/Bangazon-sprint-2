@@ -2,6 +2,9 @@ from django.conf.urls import url
 
 from . import views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 app_name = "website"
 urlpatterns = [
     url(r'^$', views.index, name='index'),
@@ -19,5 +22,4 @@ urlpatterns = [
     url(r'^profile/(?P<pk>\d+)/edit/$', views.edit_profile, name="edit_profile"),
     url(r'^profile/(?P<pk>\d+)/edit/submit/$', views.submit_profile, name="submit_profile"),
     url(r'^profile/(?P<pk>\d+)/add_payment_option$', views.add_payment, name="add_payment")
-
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

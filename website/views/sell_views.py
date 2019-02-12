@@ -8,13 +8,13 @@ from django.urls import reverse
 
 from django.contrib.auth.models import User
 from website.models import Product, Customer, ProductType
-from website.forms import UserForm, ProductForm
+from website.forms import UserForm, ProductForm, ImageForm
 
 
 def sell_product(request):
     """Handles displaying, validating, and posting the new product form
 
-    Author(s): Nolan Little
+    Author(s): Nolan Little, Zac Jones
 
     Arguments:
         request {request object}
@@ -28,10 +28,12 @@ def sell_product(request):
 
     if request.method == 'GET':
         product_form = ProductForm()
+        image_form = ImageForm()
         template_name = 'product/create.html'
-        return render(request, template_name, {'product_form': product_form})
+        return render(request, template_name, {'product_form': product_form, 'image_form': image_form})
 
     elif request.method == 'POST':
+        
         form_data = request.POST
 
         p_form_data = {
@@ -43,6 +45,7 @@ def sell_product(request):
         }
 
         product_form = ProductForm(p_form_data)
+        image_form = ImageForm(request.POST, request.FILES)
 
         if product_form.is_valid():
             customer_id = request.user.id
@@ -60,12 +63,26 @@ def sell_product(request):
                 p_form_data['category']
             ]
 
+            # cannot save image via raw SQL
+            # will need to use ORM to do so (image_form.save())
+            # in order to keep the rest of Nolan's raw SQL, will save Image on its own table.......
+            # and have to change Product.image to be a FK reference to image ID
+
+            # have a default image - if user does not select an image, use image 1
+            # if they do upload an image, use that
+
+            # will need to save the image, fetch its ID, then use that to save the product
+
+            # save the photo
+            if image_form.is_valid():
+                image_form.save()
+
             with connection.cursor() as cursor:
                 cursor.execute(sql, product_params)
                 product_id = cursor.lastrowid
         else:
             template_name = 'product/create.html'
-            return render(request, template_name, {'product_form': product_form})
+            return render(request, template_name, {'product_form': product_form, 'image_form': image_form})
 
         product = Product.objects.raw('SELECT * FROM website_product WHERE id = %s', [product_id])
         template_name = 'product_details.html'

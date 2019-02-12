@@ -94,3 +94,7 @@ class ProductOrder(models.Model):
     deleted = models.BooleanField(default=False)
     def __str__(self):
         return self
+
+class Image(models.Model):
+    document = models.ImageField(upload_to='documents/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)

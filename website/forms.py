@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django import forms
-from website.models import Product, Customer, PaymentMethod, PaymentType, ProductType
+from website.models import Product, Customer, PaymentMethod, PaymentType, ProductType, Image
 from django.db import models
 
 class UserForm(forms.ModelForm):
@@ -50,10 +50,10 @@ class ProductForm(forms.ModelForm):
             },
         }
 
-class Document(models.Model):
-    description = models.CharField(max_length=255, blank=True)
-    document = models.FileField(upload_to='documents/')
-    uploaded_at = models.DateTimeField(auto_now_add=True)
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        fields = ('document',)
 
 class ProfileForm(forms.ModelForm):
     """Form class for a user editing their personal details
