@@ -7,7 +7,9 @@
     <ul class="list-group list-group-flush">
         {% for category in all_productTypes %}
 
-        <h4 class="cat_title">{{category.productCategory}} ({{category.product_set.all|length}})</h4>
+        <a class="category_header_button" href="{% url 'website:category_list' category.id %}">
+            <h4>{{category.productCategory}} ({{category.product_set.all|length}})</h4>
+        </a>
 
         {% for products in limit_products_list %}
 
