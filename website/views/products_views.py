@@ -1,7 +1,7 @@
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.template import RequestContext
 
 from website.forms import UserForm, ProductForm
@@ -50,6 +50,17 @@ def categories(request):
     return render(request, 'categories.html', context)
 
 def product_details(request, product_id):
+    user_id = request.user.id
+    liked = "None"
+    try:
+        likedCount = get_list_or_404(ProductLike, product_id=product_id)
+        if len(likedCount) > 0:
+            for item in likedCount:
+                if item.user_id == user_id:
+                    liked = item.liked
+                    print("liked", liked)
+    except:
+        print("no liked data")
     product = Product.objects.raw('''SELECT * from website_product p
                                             WHERE p.id = %s''', [product_id])[0]
     orders = ProductOrder.objects.raw('''SELECT * from website_productOrder p
@@ -57,11 +68,9 @@ def product_details(request, product_id):
     orderCount = len(orders)
     quantity = product.quantity - orderCount
     product.quantity = quantity
-    # likedCount = ProductLike.objects.raw('''Select * from website_productlike
-    #                                     WHERE website_productlike.product_id = %s''', [product_id])[0]
-    # print("likedCount", likedCount)
     template_name = 'product_details.html'
-    return render(request, template_name, {'product': product, 'product_id': product_id})
+    print("liked", liked)
+    return render(request, template_name, {'product': product, 'product_id': product_id, 'liked': liked})
 
 
 def category_list(request, productType_id):
