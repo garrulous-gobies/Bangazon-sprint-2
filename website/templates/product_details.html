@@ -8,16 +8,8 @@
 <p class="product_price">Price: ${{product.price}}</p>
 <p class="product_quantity">Quantity Available: {{product.quantity}}</p>
 {% if user.is_authenticated %}
-    {% if liked != "None" %}
-        <p class="rating_text">Your Item Ranking</p>
-        {% if liked == True %}
-            <img class="rating_image" src="{% static 'website/thumbsup.png' %}" alt="Recommended">
-        {% else %}
-            <img class="rating_image" src="{% static 'website/thumbsdown.png' %}" alt="Recommended">
-        {% endif %}
-    {% else %}
-        <p class="rating_text">Rank This Item</p>
-    {% endif %}
+    <p class="rating_text">Your Item Ranking</p>
+    <section class="star_rating">{{liked|safe}}</section>
 <a class="add_to_cart" href="{% url 'website:add_to_cart' product_id %}">
     Add To Cart
 </a>

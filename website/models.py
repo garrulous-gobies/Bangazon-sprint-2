@@ -105,6 +105,6 @@ class ProductLike(models.Model):
         User,
         on_delete=models.DO_NOTHING,
     )
-    liked = models.BooleanField(default=False)
+    liked = models.IntegerField(default=0)
     def __str__(self):
         return self

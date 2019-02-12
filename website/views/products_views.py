@@ -51,13 +51,32 @@ def categories(request):
 
 def product_details(request, product_id):
     user_id = request.user.id
-    liked = "None"
+    liked = ""
     try:
         likeCount = ProductLike.objects.raw('''SELECT * from website_productlike p
                                             WHERE p.product_id = %s AND p.user_id = %s''', [product_id, user_id])[0]
-        liked = likeCount.liked
+        rate = likeCount.liked
+        starPrint = 0
+        while rate > 0:
+            if rate > .75:
+                liked += '<img class="rating_star" src="../static/website/goldStar.png" alt="Gold Star">'
+                rate -= 1
+                starPrint += 1
+            elif rate > .25:
+                liked += '<img class="rating_star" src="../static/website/halfStar.png" alt="Half Star">'
+                rate = 0
+                starPrint += 1
+        print("starPrint start", starPrint)
+        while starPrint != 5:
+            liked += '<img class="rating_star" src="../static/website/whiteStar.png" alt="White Star">'
+            starPrint += 1
+            print("starPrint during", starPrint)
     except:
-        print("No review found.")
+        starPrint = 0
+        while starPrint != 5:
+            liked += '<img class="rating_star" src="../static/website/whiteStar.png" alt="White Star">'
+            starPrint += 1
+            print("starPrint during", starPrint)
     product = Product.objects.raw('''SELECT * from website_product p
                                             WHERE p.id = %s''', [product_id])[0]
     orders = ProductOrder.objects.raw('''SELECT * from website_productOrder p

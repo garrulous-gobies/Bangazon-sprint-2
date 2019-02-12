@@ -459,3 +459,15 @@ button a {
     border: 3px solid black;
     border-radius: 10px;
 }
+
+.star_rating {
+    display: flex;
+    height: 75px;
+    justify-content: center;
+}
+
+.rating_star {
+    width: 60px;
+    display: flex;
+    margin: 10px;
+}
