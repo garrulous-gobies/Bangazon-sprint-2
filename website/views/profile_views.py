@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.urls import reverse
 
 from website.forms import UserForm, ProductForm, PaymentForm
-from website.models import Product
+from website.models import Product, PaymentMethod
 from django.db import connection
 from website.forms import ProfileForm, CustomerForm
 from django.urls import reverse
@@ -35,7 +35,17 @@ def profile(request, pk):
         except connection.OperationalError as err:
             print("Error...", err)
 
-    context = {"profile": profile}
+    sql = """ SELECT *, substr(pm.accountNumber, -4, 4) as "Four"
+              FROM website_paymentmethod pm
+              JOIN website_paymenttype pt
+              ON pm.paymentName_id = pt.id
+              WHERE customerPayment_id = %s
+              AND pm.deleted = 0
+    """
+    
+    payment_types= PaymentMethod.objects.raw(sql, [pk,]) 
+
+    context = {"profile": profile, "payment_types":payment_types}
 
     return render(request, 'profile.html', context)
 
@@ -163,5 +173,61 @@ def add_payment(request, pk):
 
         return HttpResponseRedirect(reverse('website:profile',args=(pk,)))
 
+def delete_payment(request, pk, payment_id ):
+    '''Summary: This method will redirect the user to a confirm delete page, with the information of the selected payment type displayed.
+    
+    Arguments:
+        request -- request object
+        pk -- user id
+        payment_id -- payment type id
+    
+    Method(s): PaymentMethod, PaymentType
+
+    Template(s): confirm_delete_payment.html
+
+    Author(s): Austin Zoradi
+    '''
+
+   
+    sql = """ SELECT *, substr(pm.accountNumber, -4, 4) as "Four"
+              FROM website_paymentmethod pm
+              JOIN website_paymenttype pt
+              ON pm.paymentName_id = pt.id
+              WHERE customerPayment_id = %s
+              AND pm.id = %s
+             
+    """
+    
+    payment_type= PaymentMethod.objects.raw(sql, [pk, payment_id])[0]
+
+    context = {"payment_type":payment_type}
+
+    return render(request, "confirm_delete_payment.html", context)
+ 
+
+def remove_payment(request, pk, payment_id):
+    '''Summary: This method will update a payment type to deleted. It will then no longer be an option for the user to see or choose. Reducts to the profile page.
+    
+    Arguments:
+        request -- request object
+        pk -- user id
+        payment_id -- id of payment type
+    
+    Model(s): PaymentMethod
+
+    Author(s): Austin Zoradi
+
+    '''
 
 
+    sql ="""UPDATE website_paymentmethod SET deleted=1 WHERE customerPayment_id = %s AND id = %s
+     """
+    payment_params = [
+        pk,
+        payment_id
+    ]
+
+    with connection.cursor() as cursor:
+        cursor.execute(sql, payment_params)
+
+    return HttpResponseRedirect(reverse('website:profile',args=(pk,)))

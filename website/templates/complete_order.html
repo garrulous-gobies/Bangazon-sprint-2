@@ -4,11 +4,13 @@
 {% block content %}
 <section class="complete_order">
     <h3 class="product_title">{{user.username}}'s Payment Options</h3>
+    {% if payment_types|length  > 0 %}
     <form action="{% url 'website:save_payment' user.id %}" method="post" >
         {% csrf_token %}
         {{ payment_form }}
         <input type="submit" class="btn btn-primary">
     </form>
+    {% endif %}
     <section class="shop_btn">
         <button class="btn btn-primary"><a href="{% url 'website:add_payment' user.id %}">Add Payment Type</a></button>
         <button class="btn btn-primary select_btn"><a href="{% url 'website:cart' %}">Cancel</a></button>

@@ -83,6 +83,7 @@ def select_payment(request, pk):
               JOIN website_paymenttype pt
               ON pm.paymentName_id = pt.id
               WHERE customerPayment_id = %s
+              AND pm.deleted = 0
     """
     
     payment_types= PaymentMethod.objects.raw(sql, [pk,])   

@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<section>
+    <p>Are you sure you want to delete your {{payment_type.paymentCategory}} ending in {{payment_type.Four}}</p>
+    <section class="flex_this">
+        <button class="btn btn-primary"><a href="{% url 'website:profile' user.id %}">Cancel</a></button>
+        <button class="btn btn-danger"><a href="{% url 'website:remove_payment' payment_type.customerPayment_id payment_type.id %}">Delete</a></button>
+    </section>
+</section>
+
+{% endblock content %}
+
