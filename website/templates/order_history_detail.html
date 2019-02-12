@@ -1,0 +1,57 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+        <div class="container">
+            <h3>Order {{order.id}} details</h3>
+            <div class="row">
+                <div class="col-sm">
+                    <h5>Products in Order</h5>
+                    <ul class="list-group">
+                    {% for product_order in order.productorder_set.all %}
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-9">{{product_order.product.title}}:</div>
+                                <div class="col-sm-3 align-self-end">${{product_order.product.price}}</div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-sm container">
+                    <h5>Payment Details</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-9">Payment Method:</div>
+                                <div class="col-sm-3 align-self-end">{{star_chars}}{{truncated_acct_num}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-9">Total Before Tax:</div>
+                                <div class="col-sm-3 align-self-end">${{order_total.sub_total}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-9">Estimated Tax Collected:</div>
+                                <div class="col-sm-3 align-self-end"> ${{order_total.tax}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-9">Grand Total:</div>
+                                <div class="col-sm-3 align-self-end"> ${{order_total.total}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <button class="btn btn-primary">
+                <a href="{% url 'website:order_history' user.id %}">View Order History</a>
+            </button>
+        </div>
+
+
+{% endblock content %}
