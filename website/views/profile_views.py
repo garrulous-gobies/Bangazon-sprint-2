@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.urls import reverse
 
 from website.forms import UserForm, ProductForm, PaymentForm
-from website.models import Product
+from website.models import Product, PaymentMethod
 from django.db import connection
 from website.forms import ProfileForm, CustomerForm
 from django.urls import reverse
@@ -35,7 +35,16 @@ def profile(request, pk):
         except connection.OperationalError as err:
             print("Error...", err)
 
-    context = {"profile": profile}
+    sql = """ SELECT *, substr(pm.accountNumber, -4, 4) as "Four"
+              FROM website_paymentmethod pm
+              JOIN website_paymenttype pt
+              ON pm.paymentName_id = pt.id
+              WHERE customerPayment_id = %s
+    """
+    
+    payment_types= PaymentMethod.objects.raw(sql, [pk,]) 
+
+    context = {"profile": profile, "payment_types":payment_types}
 
     return render(request, 'profile.html', context)
 
