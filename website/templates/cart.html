@@ -16,10 +16,10 @@
     <p class="cart_description"> {{product.description}}</p>
     <p class="cart_price"> ${{product.price}}</p>
     <a class="cart_icon" href="{% url 'website:remove_from_cart' product.order_id %}">
-            <img class="cart_icon_image" src="{% static 'website/trash.png' %}" alt="Remove Item">
+        <img class="cart_icon_image" src="{% static 'website/trash.png' %}" alt="Remove Item">
     </a>
     <a class="cart_icon" href="{% url 'website:add_to_cart' product.id %}">
-            <img class="cart_icon_image" src="{% static 'website/add.png' %}" alt="Add Item">
+        <img class="cart_icon_image" src="{% static 'website/add.png' %}" alt="Add Item">
     </a>
 </section>
 {% endfor %}
@@ -41,7 +41,10 @@
         <p class="cart_total_label">Total Price</p>
         <p class="cart_total_with_tax"> ${{total_with_tax}}</p>
     </section>
-    <button class="btn btn-primary"><a href="{% url 'website:select_payment' user.id %}">Complete Order</a></button>
+    <section class="shop_btn">
+        <button class="btn btn-primary order_btn"><a href="{% url 'website:select_payment' user.id %}">Complete
+                Order</a></button>
+    </section>
     </button>
 </section>
 

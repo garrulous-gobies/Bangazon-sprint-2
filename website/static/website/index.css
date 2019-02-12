@@ -378,3 +378,7 @@ button a {
     background-color: black;
     text-decoration: none;
 }
+
+.order_btn {
+    margin-top: 10px;
+}
