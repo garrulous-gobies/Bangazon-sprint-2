@@ -134,9 +134,9 @@ def submit_profile(request, pk):
 
 def add_payment(request, pk):
     """This view will display a form to add a new payment option when the button is clicked. The form includes an input field for the account number and a dropdown of all the types of payments in the db. When the request is a POST (when the save button is clicked) the form saves the input the db for the user.
-    
+
     Arguments: pk {[primary key]} -- the user's Id
-    
+
     Modal(s): PaymentMathods, PaymentType
 
     Form(s): PaymentForm

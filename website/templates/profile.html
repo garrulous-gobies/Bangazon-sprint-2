@@ -22,18 +22,21 @@
     {% for type in payment_types %}
     <li class="flex_this">
         <p>{{type.paymentCategory}} ending in {{type.Four}}</p>
-        <button class="btn btn-danger"><a href="{% url 'website:delete_payment' user.id type.id %}">Delete Payment Option</a></button>
+        <button class="btn btn-danger"><a href="{% url 'website:delete_payment' user.id type.id %}">Delete Payment
+                Option</a></button>
     </li>
     {% endfor %}
-   
+
 </ul>
 
-<button class="btn btn-primary"><a href="{% url 'website:add_payment' user.id %}">Add Payment Type</a></button>
+<button class="btn btn-primary">
+    <a href="{% url 'website:add_payment' user.id %}">Add Payment Type</a>
+</button>
 
-<h3>Order History</h3>
-
-<ul>
-    <li>Here is where order history will be listed.</li>
-</ul>
+<div class="mt-3">
+    <button class="btn btn-primary">
+        <a href="{% url 'website:order_history' user.id %}">View Order History</a>
+    </button>
+</div>
 
 {% endblock content %}

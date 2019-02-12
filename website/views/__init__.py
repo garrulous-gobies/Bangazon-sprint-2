@@ -4,3 +4,4 @@ from .main_views import *
 from .products_views import *
 from .profile_views import *
 from .sell_views import *
+from .order_history import *
