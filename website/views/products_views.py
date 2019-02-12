@@ -74,7 +74,9 @@ def product_details(request, product_id):
     product = Product.objects.raw('''SELECT * from website_product p
                                             WHERE p.id = %s''', [product_id])[0]
     orders = ProductOrder.objects.raw('''SELECT * from website_productOrder p
-                                        WHERE p.product_id = %s AND p.deleted=0''', [product_id])
+                                    left join website_order o
+                                    on o.id = p.order_id
+                                    WHERE p.product_id = %s AND p.deleted=0 AND o.paymentOrder_id != 1''', [product.id])
     orderCount = len(orders)
     quantity = product.quantity - orderCount
     product.quantity = quantity
@@ -89,7 +91,9 @@ def category_list(request, productType_id):
                                           WHERE website_producttype.id = %s''', [productType_id])[0]
     for item in all_products:
         orders = ProductOrder.objects.raw('''SELECT * from website_productOrder p
-                                        WHERE p.product_id = %s AND p.deleted=0''', [item.id])
+	                                        left join website_order o
+	                                        on o.id = p.order_id
+                                            WHERE p.product_id = %s AND p.deleted=0 AND o.paymentOrder_id != 1''', [item.id])
         orderCount = len(orders)
         item.quantityRemaining = item.quantity - orderCount
     template_name = 'category_list.html'
