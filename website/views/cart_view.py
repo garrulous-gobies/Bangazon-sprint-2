@@ -97,9 +97,7 @@ def select_payment(request, pk):
 
     payment_form = addPayment(card_choices=card_choices)
     context = {"payment_types": payment_types, "payment_form": payment_form }
-    response = render(request, 'complete_order.html', context)
-    response.set_cookie('check_out', True)
-    return response
+    return render(request, 'complete_order.html', context)
 
 def save_payment(request, pk):
     """ Summary: This will udate the order in the DB with the value of the radio button chosen (ie the id of the payment type).

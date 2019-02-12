@@ -6,6 +6,7 @@
 <form action="{% url 'website:add_payment' user.id %}" method="post">
     {% csrf_token %}
     {{ payment_form.as_p }}
+    <input type="hidden" name="next" value="{{ request.GET.next }}">
     <input type="submit"  class="btn btn-primary " value="Add Payment Option" />
 </form>
 {% endblock content %}
