@@ -322,5 +322,15 @@ c.execute('''INSERT INTO website_paymentmethod VALUES (
              0,
              2,
              4)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             1,
+             6,
+             2)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             1,
+             14,
+             2)''')
 
 conn.commit()

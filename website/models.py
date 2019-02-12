@@ -94,3 +94,17 @@ class ProductOrder(models.Model):
     deleted = models.BooleanField(default=False)
     def __str__(self):
         return self
+
+
+class ProductLike(models.Model):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.DO_NOTHING,
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.DO_NOTHING,
+    )
+    liked = models.BooleanField(default=False)
+    def __str__(self):
+        return self

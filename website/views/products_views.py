@@ -57,13 +57,16 @@ def product_details(request, product_id):
     orderCount = len(orders)
     quantity = product.quantity - orderCount
     product.quantity = quantity
+    # likedCount = ProductLike.objects.raw('''Select * from website_productlike
+    #                                     WHERE website_productlike.product_id = %s''', [product_id])[0]
+    # print("likedCount", likedCount)
     template_name = 'product_details.html'
     return render(request, template_name, {'product': product, 'product_id': product_id})
 
 
 def category_list(request, productType_id):
     all_products = Product.objects.raw('''SELECT * from website_product
-                                          WHERE website_product.productType_id = %s''', [productType_id])
+                                          WHERE website_product.producttype_id = %s''', [productType_id])
     category = ProductType.objects.raw('''Select * from website_producttype
                                           WHERE website_producttype.id = %s''', [productType_id])[0]
     for item in all_products:
