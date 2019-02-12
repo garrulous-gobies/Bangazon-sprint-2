@@ -10,18 +10,23 @@
         <a class="category_header_button" href="{% url 'website:category_list' category.id %}">
             <h4>{{category.productCategory}} ({{category.product_set.all|length}})</h4>
         </a>
+        <article class="main_product_list">
+            {% for products in limit_products_list %}
 
-        {% for products in limit_products_list %}
+            {% for product in products %}
 
-        {% for product in products %}
+            {% if product.productType_id == category.id %}
 
-        {% if product.productType_id == category.id %}
+            <a class="list_products" href="{% url 'website:product_details' product.id%}">
+                <img class="all_image" src={{product.image}} alt={{product.title}}>
+                <p class="all_list_title">{{ product.title }}</p>
+                <p class="all_list_price">Price: ${{product.price}}</p>
+            </a>
 
-        <li class="list-group-item"> <a href="{% url 'website:product_details' product.id %}">{{product.title}}</a></li>
-
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+        </article>
         {% endfor %}
     </ul>
 </div>

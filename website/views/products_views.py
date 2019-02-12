@@ -53,14 +53,11 @@ def product_details(request, product_id):
     user_id = request.user.id
     liked = "None"
     try:
-        likedCount = get_list_or_404(ProductLike, product_id=product_id)
-        if len(likedCount) > 0:
-            for item in likedCount:
-                if item.user_id == user_id:
-                    liked = item.liked
-                    print("liked", liked)
+        likeCount = ProductLike.objects.raw('''SELECT * from website_productlike p
+                                            WHERE p.product_id = %s AND p.user_id = %s''', [product_id, user_id])[0]
+        liked = likeCount.liked
     except:
-        print("no liked data")
+        print("No review found.")
     product = Product.objects.raw('''SELECT * from website_product p
                                             WHERE p.id = %s''', [product_id])[0]
     orders = ProductOrder.objects.raw('''SELECT * from website_productOrder p
@@ -69,7 +66,6 @@ def product_details(request, product_id):
     quantity = product.quantity - orderCount
     product.quantity = quantity
     template_name = 'product_details.html'
-    print("liked", liked)
     return render(request, template_name, {'product': product, 'product_id': product_id, 'liked': liked})
 
 
@@ -83,6 +79,5 @@ def category_list(request, productType_id):
                                         WHERE p.product_id = %s AND p.deleted=0''', [item.id])
         orderCount = len(orders)
         item.quantityRemaining = item.quantity - orderCount
-    print("category",category.productCategory)
     template_name = 'category_list.html'
     return render(request, template_name, {'products': all_products, 'category': category})

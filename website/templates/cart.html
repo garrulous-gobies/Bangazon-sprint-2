@@ -11,15 +11,17 @@
 </section>
 {% for product in products_in_cart %}
 <section class="cart_item">
-    <img class="cart_item_image" src={{product.image}} alt={{product.title}}>
-    <p class="cart_title"> {{product.title}}</p>
-    <p class="cart_description"> {{product.description}}</p>
-    <p class="cart_price"> ${{product.price}}</p>
+    <a class="product_details_link" href="{% url 'website:product_details' product.id %}">
+        <img class="cart_item_image" src={{product.image}} alt={{product.title}}>
+        <p class="cart_title"> {{product.title}}</p>
+        <p class="cart_description"> {{product.description}}</p>
+        <p class="cart_price"> ${{product.price}}</p>
+    </a>
     <a class="cart_icon" href="{% url 'website:remove_from_cart' product.order_id %}">
-            <img class="cart_icon_image" src="{% static 'website/trash.png' %}" alt="Remove Item">
+        <img class="cart_icon_image" src="{% static 'website/trash.png' %}" alt="Remove Item">
     </a>
     <a class="cart_icon" href="{% url 'website:add_to_cart' product.id %}">
-            <img class="cart_icon_image" src="{% static 'website/add.png' %}" alt="Add Item">
+        <img class="cart_icon_image" src="{% static 'website/add.png' %}" alt="Add Item">
     </a>
 </section>
 {% endfor %}

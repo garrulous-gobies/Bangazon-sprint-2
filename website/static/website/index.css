@@ -184,6 +184,7 @@ button a {
 
 .cart_item_labels {
     display: inline-flex;
+    margin-left: 5%;
 }
 
 .cart_item_labels > p {
@@ -436,4 +437,25 @@ button a {
     display: flex;
     margin: auto;
     margin-top: 5px;
+}
+
+.product_details_link {
+    display: inline-flex;
+    width: 95%;
+    align-items: center;
+    margin: auto;
+    border: 3px solid;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: black;
+    padding-left: 5vw;
+}
+
+.product_details_link:hover {
+    background-color: #c7c7c7;
+    color: white;
+    text-decoration: none;
+    border: 3px solid black;
+    border-radius: 10px;
 }
