@@ -123,11 +123,15 @@ def submit_profile(request, pk):
     return HttpResponseRedirect(reverse('website:profile',args=(pk,)))
 
 def add_payment(request, pk):
-    """[summary]
+    """This view will display a form to add a new payment option when the button is clicked. The form includes an input field for the account number and a dropdown of all the types of payments in the db. When the request is a POST (when the save button is clicked) the form saves the input the db for the user.
+    
+    Arguments: pk {[primary key]} -- the user's Id
+    
+    Modal(s): PaymentMathods, PaymentType
 
-    Arguments:
-        request {[type]} -- [description]
-        pk {[type]} -- [description]
+    Form(s): PaymentForm
+
+    Template(s): new_payment.html
 
     Author(s): Austin Zoradi
     """
@@ -158,6 +162,4 @@ def add_payment(request, pk):
             cursor.execute(sql, payment_params)
 
         return HttpResponseRedirect(reverse('website:profile',args=(pk,)))
-
-
 

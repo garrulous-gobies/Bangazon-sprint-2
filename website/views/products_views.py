@@ -23,30 +23,25 @@ def categories(request):
     Author(s): Austin Zoradi
     """
 
-    sql = """ SELECT *
-              FROM "website_product"
-    """
-
-    sql2 = """SELECT *
+    sql1 = """SELECT *
               FROM "website_producttype"
     """
 
-    sql3 = """SELECT *
+    sql2 = """SELECT *
                FROM "website_product"
                WHERE website_product.ProductType_id = %s
                LIMIT 3
     """
 
-    all_products = Product.objects.raw(sql)
-    all_productTypes = ProductType.objects.raw(sql2)
-
+    all_productTypes = ProductType.objects.raw(sql1)
+    
     limit_products_list = list()
-
-    for cat_id in ProductType.objects.raw(sql2):
-        limit_products = Product.objects.raw(sql3, [cat_id.id,])
+    
+    for cat_id in ProductType.objects.raw(sql1):
+        limit_products = Product.objects.raw(sql2, [cat_id.id,])
         limit_products_list.append(limit_products)
-
-    context = {"all_products": all_products, "all_productTypes": all_productTypes, "limit_products_list": limit_products_list}
+    
+    context = {"all_productTypes": all_productTypes, "limit_products_list": limit_products_list}
     return render(request, 'categories.html', context)
 
 def product_details(request, product_id):

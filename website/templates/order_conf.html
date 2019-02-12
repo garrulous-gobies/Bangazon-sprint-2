@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<section>
+    <h2 class="product_title"> {{user.username}}, Thank You For Your Order! </h2>
+    <p class="text_center lrg-txt">Your Order is on it's Way</p>
+    <div class="shop_btn">
+        <button class="btn btn-primary"><a href="{% url 'website:categories' %}">Continue Shopping</a></button>
+    </div>
+</section>
+
+{% endblock content %}
