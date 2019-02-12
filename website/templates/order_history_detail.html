@@ -7,30 +7,38 @@
             <div class="row">
                 <div class="col-sm">
                     <h5>Products in Order</h5>
-                    <ul class="list-group list-group-flush">
+                    <ul class="list-group">
                     {% for product_order in order.productorder_set.all %}
                             <li class="list-group-item">{{product_order.product.title}} -- {{product_order.product.price}}</li>
                     {% endfor %}
                     </ul>
                 </div>
-                <div class="col-sm">
+                <div class="col-sm container">
                     <h5>Payment Details</h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item row">
-                            <span class="col-sm">Payment Method:</span>
-                            <span class="col-sm">{{star_chars}}{{truncated_acct_num}}</span>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-9">Payment Method:</div>
+                                <div class="col-sm-3 align-self-end">{{star_chars}}{{truncated_acct_num}}</div>
+                            </div>
                         </li>
-                        <li class="list-group-item row">
-                            <span class="col-sm">Total Before Tax:</span>
-                            <span class="col-sm">{{order_total.sub_total}}</span>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-9">Total Before Tax:</div>
+                                <div class="col-sm-3 align-self-end">${{order_total.sub_total}}</div>
+                            </div>
                         </li>
-                        <li class="list-group-item row">
-                            <span class="col-sm">Estimated Tax To Be Collected:</span>
-                            <span class="col-sm"> {{order_total.tax}}</span>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-9">Estimated Tax Collected:</div>
+                                <div class="col-sm-3 align-self-end"> ${{order_total.tax}}</div>
+                            </div>
                         </li>
-                        <li class="list-group-item row">
-                            <span class="col-sm">Grand Total:</span>
-                            <span class="col-sm">{{order_total.total}}</span>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-9">Grand Total:</div>
+                                <div class="col-sm-3 align-self-end"> ${{order_total.total}}</div>
+                            </div>
                         </li>
                     </ul>
                 </div>
