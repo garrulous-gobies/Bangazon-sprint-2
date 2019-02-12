@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+{% block content %}
+
+<h2>Categories</h2>
+<div>
+    <form class="edit_rating_form" action="{% url 'website:save_edits' %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input class="save_edit_btn" type="submit" value="Save Changes">
+        <a class="home_link" href="{% url 'website:index' %}">Cancel</a>
+    </form>
+</div>
+{% endblock content %}

@@ -325,16 +325,19 @@ c.execute('''INSERT INTO website_paymentmethod VALUES (
 c.execute('''INSERT INTO website_productlike VALUES (
              Null,
              5,
+             "Great product!!! It has all my favorite shows and an easy link to surf the web!",
              6,
              2)''')
 c.execute('''INSERT INTO website_productlike VALUES (
              Null,
              4,
+             "Pretty great gaming. Deducted a star due to the price.",
              14,
              2)''')
 c.execute('''INSERT INTO website_productlike VALUES (
              Null,
              1,
+             "The text might be alright, but I prefer pop-up books.",
              3,
              2)''')
 

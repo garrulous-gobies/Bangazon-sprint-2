@@ -4,7 +4,7 @@ from website.models import Product, Customer, PaymentMethod, PaymentType, Produc
 
 class UserForm(forms.ModelForm):
         password = forms.CharField(widget=forms.PasswordInput())
-        
+
         class Meta:
             model = User
             fields = ('username', 'email', 'password', 'first_name', 'last_name',)
@@ -93,3 +93,9 @@ class PaymentForm(forms.ModelForm):
     class Meta:
         model = PaymentMethod
         fields = ('accountNumber', 'paymentName')
+
+class ProductLikeForm(forms.ModelForm):
+    liked = forms.IntegerField(label='Product Rating (0-5)', min_value=0, max_value=5)
+    comment = forms.CharField(strip=False, max_length=250)
+    product_id = forms.IntegerField(widget = forms.HiddenInput())
+    user_id = forms.IntegerField(widget = forms.HiddenInput())

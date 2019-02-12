@@ -92,7 +92,8 @@
 }
 
 .product_title {
-    font-size: 30px;
+    font-size: 22px;
+    margin-bottom: 0px;
     font-weight: bolder;
     text-align: center;
 }
@@ -106,6 +107,7 @@
 
 .product_description {
     width: 90vw;
+    margin-bottom: 2px;
     margin-left: 5vw;
     font-weight: 500;
     font-size: 16px;
@@ -155,7 +157,7 @@
     margin: auto;
     margin-top: 10px;
     display: flex;
-    width: 135px;
+    width: 230px;
     justify-content: center;
     font-weight: bold;
     border-radius: 20px;
@@ -169,7 +171,7 @@
     margin: auto;
     margin-top: 10px;
     display: flex;
-    width: 135px;
+    width: 230px;
     justify-content: center;
     font-weight: bold;
     border-radius: 20px;
@@ -399,7 +401,7 @@ button a {
     margin: auto;
     margin-top: 10px;
     display: flex;
-    width: 135px;
+    width: 230px;
     justify-content: center;
     font-weight: bold;
     border-radius: 20px;
@@ -413,7 +415,7 @@ button a {
     margin: auto;
     margin-top: 10px;
     display: flex;
-    width: 135px;
+    width: 230px;
     justify-content: center;
     font-weight: bold;
     border-radius: 20px;
@@ -462,12 +464,23 @@ button a {
 
 .star_rating {
     display: flex;
-    height: 75px;
+    height: 50px;
     justify-content: center;
 }
 
 .rating_star {
-    width: 60px;
+    width: 35px;
     display: flex;
-    margin: 10px;
+    margin: 7px;
+}
+
+.rating_comment {
+    text-align: center;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    font-weight: 600;
+    border: 2px solid;
+    width: 80%;
+    margin-left: 10%;
+    background-color: lightgray;
 }
