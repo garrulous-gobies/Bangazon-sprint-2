@@ -76,6 +76,13 @@ class CustomerForm(forms.ModelForm):
         fields = ('address', 'phoneNumber',)
 
 class PaymentForm(forms.ModelForm):
+    """Summary: Form for adding a new payment method. Creates a dropdown of all type of payment methods in DB and gives an input form for the account number
+
+    Model(s): PaymentType, PaymentMethod
+
+    Author(s): Austin Zoradi
+    """
+
     def getPaymentType():
         sql = "SELECT * FROM website_paymenttype"
         payment_types = PaymentType.objects.raw(sql)
@@ -99,3 +106,17 @@ class ProductLikeForm(forms.ModelForm):
     comment = forms.CharField(strip=False, max_length=250)
     product_id = forms.IntegerField(widget = forms.HiddenInput())
     user_id = forms.IntegerField(widget = forms.HiddenInput())
+
+class addPayment(forms.Form):
+    """Summary: form to add a payment option to an order and in order to "pay" for the order and close it. Renders radio button with a label of the paymentCaetgory name and teh last four digits of the account number. The radio buttons have a value of the payment type if
+
+    Model(s): Orders, PaymentType, PaymentMethod
+
+    Author(s): Austin Zoradi, Zac Jones
+    """
+
+
+    def __init__(self, **kwargs):
+        card_choices = kwargs.pop('card_choices')
+        super(addPayment, self).__init__(**kwargs)
+        self.fields['payment_type'] =  forms.CharField(label="Payment Options", widget=forms.RadioSelect(choices=card_choices))

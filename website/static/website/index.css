@@ -309,6 +309,14 @@ button a {
     text-decoration: none;
 }
 
+.category_div{
+    margin: 0px 10px;
+}
+
+.cat_title {
+    margin: 5px 0px;
+    padding: 5px 0px;
+}
 
 /* Styling for All Products List */
 .main_title {
@@ -361,6 +369,33 @@ button a {
     font-weight: 700;
 }
 
+.select_btn {
+    margin-left: 20px;
+}
+
+.done_btn {
+    margin: 10px 0px 0px 25px;
+}
+
+.complete_order form{
+    margin: 20px;
+}
+.complete_order li{
+    list-style-type: none;
+}
+
+.shop_btn {
+    display: flex; 
+    justify-content: center;
+}
+.text_center {
+    text-align: center;
+}
+
+.lrg-txt {
+    font-size: 1.5rem;
+}
+
 .password_match {
     text-align: center;
     width: 90%;
@@ -392,6 +427,10 @@ button a {
     color: white;
     background-color: black;
     text-decoration: none;
+}
+
+.order_btn {
+    margin-top: 10px;
 }
 
 .similar_items_button {

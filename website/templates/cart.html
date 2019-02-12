@@ -43,6 +43,11 @@
         <p class="cart_total_label">Total Price</p>
         <p class="cart_total_with_tax"> ${{total_with_tax}}</p>
     </section>
+    <section class="shop_btn">
+        <button class="btn btn-primary order_btn"><a href="{% url 'website:select_payment' user.id %}">Complete
+                Order</a></button>
+    </section>
+    </button>
 </section>
 
 {% endblock content %}
