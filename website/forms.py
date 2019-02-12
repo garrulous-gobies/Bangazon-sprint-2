@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django import forms
-from website.models import Product, Customer, PaymentMethod, PaymentType, ProductType
+from website.models import *
 
 class UserForm(forms.ModelForm):
         password = forms.CharField(widget=forms.PasswordInput())
@@ -101,11 +101,9 @@ class PaymentForm(forms.ModelForm):
         model = PaymentMethod
         fields = ('accountNumber', 'paymentName')
 
-class ProductLikeForm(forms.ModelForm):
-    liked = forms.IntegerField(label='Product Rating (0-5)', min_value=0, max_value=5)
-    comment = forms.CharField(strip=False, max_length=250)
-    product_id = forms.IntegerField(widget = forms.HiddenInput())
-    user_id = forms.IntegerField(widget = forms.HiddenInput())
+# class ProductLikeForm(forms.ModelForm):
+#         fields = ('liked', 'comment', 'product_id', 'user_id')
+
 
 class addPayment(forms.Form):
     """Summary: form to add a payment option to an order and in order to "pay" for the order and close it. Renders radio button with a label of the paymentCaetgory name and teh last four digits of the account number. The radio buttons have a value of the payment type if

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 
@@ -105,7 +105,7 @@ class ProductLike(models.Model):
         User,
         on_delete=models.DO_NOTHING,
     )
-    liked = models.IntegerField(default=0, min_value=0, max_value=5)
-    comment = models.CharField(strip=False, max_length=200)
+    liked = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
+    comment = models.CharField(max_length=200)
     def __str__(self):
         return self

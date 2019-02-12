@@ -385,7 +385,7 @@ button a {
 }
 
 .shop_btn {
-    display: flex; 
+    display: flex;
     justify-content: center;
 }
 .text_center {
@@ -522,4 +522,59 @@ button a {
     width: 80%;
     margin-left: 10%;
     background-color: lightgray;
+}
+
+.edit_rating_form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.edit_rating_label {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.edit_rating_rate {
+    width: 5%;
+    margin: auto;
+    text-align: center;
+}
+
+.edit_rating_text {
+    margin-bottom: 40px;
+    font-weight: 500;
+}
+
+.save_edit_btn {
+    border: 3px solid #007bff;
+    color: #007bff;
+    padding: 5px;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    width: 230px;
+    justify-content: center;
+    font-weight: bold;
+    border-radius: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.save_edit_btn:hover {
+    border: 3px solid grey;
+    padding: 5px;
+    text-decoration: none;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    width: 230px;
+    justify-content: center;
+    font-weight: bold;
+    border-radius: 20px;
+    background-color: #007bff;
+    color: white;
 }

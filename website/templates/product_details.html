@@ -14,7 +14,7 @@
 <p class="rating_text">Your Comment</p>
 <p class="rating_comment">"{{ratings.comment}}"</p>
 {% endif %}
-<a class="add_to_cart" href="{% url 'website:edit_rating' product_id %}">
+<a class="add_to_cart" href="{% url 'website:edit_ratings' product_id %}">
     Edit Rating/Comment
 </a>
 <a class="add_to_cart" href="{% url 'website:add_to_cart' product_id %}">

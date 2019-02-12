@@ -1,9 +1,9 @@
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect
 from django.template import RequestContext
-
+from django.urls import reverse
 from website.forms import *
 from website.models import *
 
@@ -34,13 +34,13 @@ def categories(request):
     """
 
     all_productTypes = ProductType.objects.raw(sql1)
-    
+
     limit_products_list = list()
-    
+
     for cat_id in ProductType.objects.raw(sql1):
         limit_products = Product.objects.raw(sql2, [cat_id.id,])
         limit_products_list.append(limit_products)
-    
+
     context = {"all_productTypes": all_productTypes, "limit_products_list": limit_products_list}
     return render(request, 'categories.html', context)
 
@@ -62,18 +62,15 @@ def product_details(request, product_id):
                 liked += '<img class="rating_star" src="../static/website/halfStar.png" alt="Half Star">'
                 rate = 0
                 starPrint += 1
-        print("starPrint start", starPrint)
         while starPrint != 5:
             liked += '<img class="rating_star" src="../static/website/whiteStar.png" alt="White Star">'
             starPrint += 1
-            print("starPrint during", starPrint)
     except:
         ratings = "Null"
         starPrint = 0
         while starPrint != 5:
             liked += '<img class="rating_star" src="../static/website/whiteStar.png" alt="White Star">'
             starPrint += 1
-            print("starPrint during", starPrint)
     product = Product.objects.raw('''SELECT * from website_product p
                                             WHERE p.id = %s''', [product_id])[0]
     orders = ProductOrder.objects.raw('''SELECT * from website_productOrder p
@@ -100,13 +97,35 @@ def category_list(request, productType_id):
 
 def edit_ratings(request, product_id):
     user_id = request.user.id
+
     try:
         item = ProductLike.objects.raw('''SELECT * from website_productlike p
                                             WHERE p.product_id = %s AND p.user_id = %s''', [product_id, user_id])[0]
-        ratings = ProductLikeForm(initial={'liked': item.liked, 'comment': item.comment, 'product_id': product_id, 'user_id': user_id})
+        comment = item.comment
+        liked = item.liked
     except:
-        ratings = ProductLikeForm(initial={'liked': None, 'comment': "", 'product_id': product_id, 'user_id': user_id})
-    return render(request, 'mymovies/new_movie.html', {'form': newForm})
+        liked = 0
+        comment = ""
+    return render(request, 'edit_rating.html', {'user_id': user_id, 'product_id': product_id, 'liked': liked, 'comment': comment})
 
 def save_edits(request):
-    editRatings = ProductLike
+    user_id = request.POST['user_id']
+    product_id = request.POST['product_id']
+    liked = request.POST['liked']
+    comment = request.POST['comment']
+    try:
+        item = ProductLike.objects.raw('''SELECT * from website_productlike p
+                                            WHERE p.product_id = %s AND p.user_id = %s''', [product_id, user_id])[0]
+        item.comment = comment
+        item.liked = liked
+        item.save()
+    except:
+        newInfo = ProductLike(liked=liked, comment=comment, product_id=product_id, user_id=user_id)
+        newInfo.save()
+    print("userId", user_id)
+    print("productId", product_id)
+    print("liked", liked)
+    print("comment", comment)
+    product_id = int(product_id)
+    return redirect('website:product_details', product_id=product_id)
+    # return HttpResponseRedirect(reverse('website:product_details', *args(product_id)))
