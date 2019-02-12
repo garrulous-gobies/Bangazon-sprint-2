@@ -12,4 +12,7 @@
     Add To Cart
 </a>
 {% endif %}
+<a class="similar_items_button" href="{% url 'website:category_list' product.productType_id %}">
+    See Similar Products
+</a>
 {% endblock content %}
