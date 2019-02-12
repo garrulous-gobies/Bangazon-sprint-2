@@ -135,7 +135,6 @@ def add_payment(request, pk):
 
     Author(s): Austin Zoradi
     """
-    print("IM THE REQUEST++++++++++++", request.path)
 
     if request.method == 'GET':
         payment_form = PaymentForm()
@@ -163,5 +162,16 @@ def add_payment(request, pk):
         with connection.cursor() as cursor:
             cursor.execute(sql, payment_params)
 
-        return HttpResponseRedirect(reverse('website:profile',args=(pk,)))
+        redirect_route = check_payment_route(request, pk)
+        return redirect_route
 
+# ========================HELPER FUNCTIONS================================================
+
+def check_payment_route(request, pk):
+    try:
+        if request.COOKIES['check_out']:
+            response = HttpResponseRedirect(reverse('website:select_payment',args=(pk,)))
+            response.delete_cookie('check_out')
+            return response
+    except KeyError:
+        return HttpResponseRedirect(reverse('website:profile',args=(pk,)))
