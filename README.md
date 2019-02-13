@@ -47,7 +47,7 @@ category, or searched by keyword.</h3>
   ```sh
   mkdir Bangazon
   cd Bangazon
-  git clone https://github.com/garrulous-gobies/Bangazon_1
+  git clone https://github.com/garrulous-gobies/Bangazon-sprint-2
   ```
 
 #### If you do not have Python version 3 installed on your machine, visit the [Python Download Page](https://www.python.org/downloads/) or to install with command line,
