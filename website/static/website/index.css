@@ -92,20 +92,22 @@
 }
 
 .product_title {
-    font-size: 30px;
+    font-size: 22px;
+    margin-bottom: 0px;
     font-weight: bolder;
     text-align: center;
 }
 
 .product_image {
     max-width: 50vw;
-    max-height: 40vh;
+    max-height: 35vh;
     display: flex;
     margin: auto;
 }
 
 .product_description {
     width: 90vw;
+    margin-bottom: 2px;
     margin-left: 5vw;
     font-weight: 500;
     font-size: 16px;
@@ -155,7 +157,7 @@
     margin: auto;
     margin-top: 10px;
     display: flex;
-    width: 135px;
+    width: 230px;
     justify-content: center;
     font-weight: bold;
     border-radius: 20px;
@@ -169,7 +171,7 @@
     margin: auto;
     margin-top: 10px;
     display: flex;
-    width: 135px;
+    width: 230px;
     justify-content: center;
     font-weight: bold;
     border-radius: 20px;
@@ -184,6 +186,7 @@ button a {
 
 .cart_item_labels {
     display: inline-flex;
+    margin-left: 5%;
 }
 
 .cart_item_labels > p {
@@ -382,7 +385,7 @@ button a {
 }
 
 .shop_btn {
-    display: flex; 
+    display: flex;
     justify-content: center;
 }
 .text_center {
@@ -437,7 +440,7 @@ button a {
     margin: auto;
     margin-top: 10px;
     display: flex;
-    width: 135px;
+    width: 230px;
     justify-content: center;
     font-weight: bold;
     border-radius: 20px;
@@ -451,7 +454,124 @@ button a {
     margin: auto;
     margin-top: 10px;
     display: flex;
-    width: 135px;
+    width: 230px;
+    justify-content: center;
+    font-weight: bold;
+    border-radius: 20px;
+    background-color: #007bff;
+    color: white;
+}
+
+.liked_image {
+
+}
+
+.rating_text {
+    text-align: center;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+.rating_image {
+    width: 60px;
+    display: flex;
+    margin: auto;
+    margin-top: 5px;
+}
+
+.product_details_link {
+    display: inline-flex;
+    width: 95%;
+    align-items: center;
+    margin: auto;
+    border: 3px solid;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: black;
+    padding-left: 5vw;
+}
+
+.product_details_link:hover {
+    background-color: #c7c7c7;
+    color: white;
+    text-decoration: none;
+    border: 3px solid black;
+    border-radius: 10px;
+}
+
+.star_rating {
+    display: flex;
+    height: 50px;
+    justify-content: center;
+}
+
+.rating_star {
+    width: 35px;
+    display: flex;
+    margin: 7px;
+}
+
+.rating_comment {
+    text-align: center;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    font-weight: 600;
+    border: 2px solid;
+    width: 80%;
+    margin-left: 10%;
+    background-color: lightgray;
+}
+
+.edit_rating_form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.edit_rating_label {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.edit_rating_rate {
+    width: 5%;
+    margin: auto;
+    text-align: center;
+}
+
+.edit_rating_text {
+    margin-bottom: 40px;
+    font-weight: 500;
+}
+
+.save_edit_btn {
+    border: 3px solid #007bff;
+    color: #007bff;
+    padding: 5px;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    width: 230px;
+    justify-content: center;
+    font-weight: bold;
+    border-radius: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.save_edit_btn:hover {
+    border: 3px solid grey;
+    padding: 5px;
+    text-decoration: none;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    width: 230px;
     justify-content: center;
     font-weight: bold;
     border-radius: 20px;

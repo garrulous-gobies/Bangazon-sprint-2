@@ -85,8 +85,8 @@ def select_payment(request, pk):
               WHERE customerPayment_id = %s
               AND pm.deleted = 0
     """
-    
-    payment_types= PaymentMethod.objects.raw(sql, [pk,])   
+
+    payment_types= PaymentMethod.objects.raw(sql, [pk,])
 
     card_choices = []
 
@@ -94,10 +94,9 @@ def select_payment(request, pk):
         payType = (choice.id, f"{choice.paymentCategory} ending in {choice.Four}")
         card_choices.append(payType)
 
-        
+
     payment_form = addPayment(card_choices=card_choices)
     context = {"payment_types": payment_types, "payment_form": payment_form }
-
     return render(request, 'complete_order.html', context)
 
 def save_payment(request, pk):
@@ -108,9 +107,9 @@ def save_payment(request, pk):
     Author(s): Austin Zoradi, Zac Jones
     """
 
-    card_type = request.POST['payment_type'] 
+    card_type = request.POST['payment_type']
     sql = """UPDATE website_order set paymentOrder_id=%s WHERE website_order.id = %s"""
-    sql2 = """SELECT o.id 
+    sql2 = """SELECT o.id
               FROM  website_order o
               WHERE o.customerOrder_id=%s
               order by o.id desc
@@ -128,4 +127,4 @@ def save_payment(request, pk):
     return render(request, "order_conf.html", {})
 
 
-    
+

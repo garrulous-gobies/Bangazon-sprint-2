@@ -1,0 +1,18 @@
+{% extends "index.html" %}
+{% block content %}
+
+<h2>Categories</h2>
+<div>
+    <form class="edit_rating_form" action="{% url 'website:save_edits' %}" method="POST">
+        {% csrf_token %}
+        <label for="liked" class="edit_rating_label">Rate Product (1-5)</label>
+        <input class="edit_rating_rate" type="number" min=0 max=5 name="liked" value="{{liked}}">
+        <label for="comment" class="edit_rating_label">Product Comments</label>
+        <input class="edit_rating_text" type="text" maxlength="500" name="comment" value="{{comment}}"">
+        <input type="hidden" name="user_id" value={{user_id}}>
+        <input type="hidden" name="product_id" value={{product_id}}>
+        <input class="save_edit_btn" type="submit" value="Save Changes">
+        <a class="save_edit_btn" href="{% url 'website:index' %}">Cancel</a>
+    </form>
+</div>
+{% endblock content %}
