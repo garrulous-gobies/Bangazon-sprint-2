@@ -608,6 +608,7 @@ button a {
     flex-direction: column;
     width: 16vw;
     align-items: center;
+    vertical-align: middle;
 }
 
 .list_rating_text {

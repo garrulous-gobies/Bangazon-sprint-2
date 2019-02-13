@@ -9,10 +9,10 @@
 <p class="product_quantity">Quantity Available: {{product.quantity}}</p>
 {% if user.is_authenticated %}
 <article class="item_star_ratings">
-    <section class="indiv_rating">
-<p class="rating_text">Average Customer Rating</p>
-<section class="star_rating">{{likedAverage|safe}}</section>
-</section>
+        <section class="indiv_rating">
+        <p class="rating_text">Average Customer Rating</p>
+        <section class="star_rating">{{likedAverage|safe}}</section>
+        </section>
 <section class="indiv_rating">
 <p class="rating_text">Your Item Rating</p>
 <section class="star_rating">{{liked|safe}}</section>
