@@ -337,7 +337,7 @@ button a {
     border-radius: 10px;
     text-decoration: none;
     color: black;
-    padding-left: 5vw;
+    padding-left: 3vw;
 }
 
 .list_products:hover {
@@ -345,6 +345,7 @@ button a {
     color: white;
     border: 3px solid black;
     border-radius: 10px;
+    text-decoration: none;
 }
 
 .all_image {
@@ -353,7 +354,7 @@ button a {
 
 .all_list_title {
     display: inline-block;
-    width: 45vw;
+    width: 30vw;
     margin: 0px;
     margin-left: 3vw;
     vertical-align: middle;
@@ -364,7 +365,7 @@ button a {
     display: inline-block;
     width: 20vw;
     margin: 0px;
-    margin-left: 5vw;
+    margin-left: 6vw;
     vertical-align: middle;
     font-weight: 700;
 }
@@ -469,7 +470,6 @@ button a {
 .rating_text {
     text-align: center;
     margin-bottom: 0px;
-    margin-top: 10px;
     font-weight: 600;
 }
 
@@ -516,7 +516,6 @@ button a {
 .rating_comment {
     text-align: center;
     margin-bottom: 0px;
-    margin-top: 10px;
     font-weight: 600;
     border: 2px solid;
     width: 80%;
@@ -581,11 +580,54 @@ button a {
 
 .flex_this {
     display: flex;
-    align-items: center; 
+    align-items: center;
     justify-content: space-between
     border: 1px solid rebeccapurple;
 }
 
 .flex_this p {
     padding-right: 20px;
+}
+
+.item_star_ratings {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin-left: 10%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.indiv_rating {
+    display: flex;
+    flex-direction: column;
+}
+
+.list_rating_section {
+    display: inline-flex;
+    flex-direction: column;
+    width: 16vw;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.list_rating_text {
+    margin: 0px;
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+}
+
+.list_star_rating {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.list_rating_star {
+    width: 26px;
+    display: flex;
+    margin: 3px;
 }

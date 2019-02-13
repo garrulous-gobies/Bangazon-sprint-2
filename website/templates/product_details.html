@@ -8,8 +8,16 @@
 <p class="product_price">Price: ${{product.price}}</p>
 <p class="product_quantity">Quantity Available: {{product.quantity}}</p>
 {% if user.is_authenticated %}
-<p class="rating_text">Your Item Ranking</p>
+<article class="item_star_ratings">
+        <section class="indiv_rating">
+        <p class="rating_text">Average Customer Rating</p>
+        <section class="star_rating">{{likedAverage|safe}}</section>
+        </section>
+<section class="indiv_rating">
+<p class="rating_text">Your Item Rating</p>
 <section class="star_rating">{{liked|safe}}</section>
+</section>
+</article>
 {% if ratings != "Null" %}
 <p class="rating_text">Your Comment</p>
 <p class="rating_comment">"{{ratings.comment}}"</p>

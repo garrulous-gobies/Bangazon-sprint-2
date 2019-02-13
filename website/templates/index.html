@@ -38,6 +38,10 @@
         <a class="list_products" href="{% url 'website:product_details' product.id%}">
             <img class="all_image" src={{product.image}} alt={{product.title}}>
             <p class="all_list_title">{{ product.title }}</p>
+            <section class="list_rating_section">
+                    <p class="list_rating_text">Average Customer Rating</p>
+                    <section class="list_star_rating">{{product.likedAverage|safe}}</section>
+            </section>
             <p class="all_list_price">Price: ${{product.price}}</p>
         </a>
         {% endfor %}

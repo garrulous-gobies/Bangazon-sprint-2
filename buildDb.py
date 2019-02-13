@@ -340,5 +340,143 @@ c.execute('''INSERT INTO website_productlike VALUES (
              "The text might be alright, but I prefer pop-up books.",
              3,
              2)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             4,
+             "Default rating comment.",
+             1,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             3,
+             "Default rating comment.",
+             2,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             2,
+             "Default rating comment.",
+             3,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             5,
+             "Default rating comment.",
+             4,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             5,
+             "Default rating comment.",
+             5,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             4,
+             "Default rating comment.",
+             6,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             5,
+             "Default rating comment.",
+             7,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             5,
+             "Default rating comment.",
+             8,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             2,
+             "Default rating comment.",
+             9,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             3,
+             "Default rating comment.",
+             10,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             1,
+             "Default rating comment.",
+             11,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             4,
+             "Default rating comment.",
+             12,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             3,
+             "Default rating comment.",
+             13,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             4,
+             "Default rating comment.",
+             14,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             5,
+             "Default rating comment.",
+             15,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             5,
+             "Default rating comment.",
+             16,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             2,
+             "Default rating comment.",
+             17,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             2,
+             "Default rating comment.",
+             18,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             4,
+             "Default rating comment.",
+             19,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             3,
+             "Default rating comment.",
+             20,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             2,
+             "Default rating comment.",
+             21,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             5,
+             "Default rating comment.",
+             22,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             4,
+             "Works well, but doesn't have iPad functionality.",
+             22,
+             2)''')
 
 conn.commit()
