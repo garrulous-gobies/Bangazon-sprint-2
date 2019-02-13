@@ -69,15 +69,16 @@ source myenv/bin/activate
 #### To install dependencies navigate to the cloned repository which contains a 'requirements.txt' file then run pip install requirements.txt
 
 ```sh
-cd Bangazon_1
-pip install requirements.txt
+cd Bangazon-sprint-2
+pip install -r requirements.txt
 ```
 
 #### Create and seed the database by changing the permissions on this shell script and executing it with the following commands:
 
 ```sh
 chmod +x django_data.sh
-./django_data.sh website buildDb.py
+./django_data.sh website
+python buildDb.py
 ```
 
 
