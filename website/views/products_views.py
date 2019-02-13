@@ -99,6 +99,32 @@ def category_list(request, productType_id):
     template_name = 'category_list.html'
     return render(request, template_name, {'products': all_products, 'category': category})
 
+def search_products(request):
+    """Summary: Allows user to search through all products.
+    
+    Arguments:
+        request -- request object
+
+    Author(s): Austin Zoradi
+    """
+    if request.POST:
+        sql = """ SELECT *
+                  FROM website_product
+                  WHERE website_product.title like %s 
+                  OR website_product.description like %s
+        """
+
+        search_param = request.POST["Search"]
+        search_param = '%' + search_param + '%'
+       
+
+        product_list = Product.objects.raw(sql, [search_param, search_param])
+        print(product_list, "+++++++++++++++++++++++++++++++++++++++++++++")
+        context={"product_list": product_list}
+
+    return render(request, "searched_product.html", context)
+            
+            
 def edit_ratings(request, product_id):
     user_id = request.user.id
 

@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+
+<h2 class="product_title">Here are your Search Results</h2>
+
+{% for product in product_list %}
+<a class="main_item_link" href="{% url 'website:product_details' product.id%}">
+    <img class="main_index_image" src={{product.image}} alt={{product.title}}>
+    <p class="main_index_title">{{ product.title }}</p>
+    <p class="main_index_price">Price: ${{product.price}}</p>
+</a>
+{% endfor %}
+
+
+{% endblock content %}

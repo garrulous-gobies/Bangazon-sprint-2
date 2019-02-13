@@ -21,6 +21,10 @@
         <li class="nav-item">
             <a class="nav-link" href="{% url 'website:logout' %}">Logout</a>
         </li>
+        <form class="form-inline my-2 my-lg-0" action="{% url 'website:search_products' %}" method="POST">
+            {% csrf_token %}
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" label="Search"  name="Search" id="Search">
+        </form>
     </ul>
     <a class="cart_anchor" href="{% url 'website:cart' %}">
         <img class="cart_image" src="{% static 'website/emptycart.png' %}" alt="Shopping Cart">
