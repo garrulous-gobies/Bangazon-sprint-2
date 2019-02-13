@@ -20,6 +20,7 @@ category, or searched by keyword.</h3>
 
 <img src="images/lucid.png"/>______<img src="images/slack.png"/>______<img src="images/vs.png"/>______<img src="images/github.jpg"/>
 
+## To see a visual walkthrough of main features navigate to the bottom of this readme or:
 
 <h2>Instructions for Installing Bangazon</h2>
 
@@ -54,54 +55,40 @@ category, or searched by keyword.</h3>
 ```sh
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew install python
-pip install django
 ```
 
-#### Now you need to migrate the models into your local folder:
+
+#### Now you need to install all dependencies. We recommend using a virtual environment to prevent these from being installed globally.
+
+#### First install virtualenv and create and enter a virtual environment, in the containing "Bangazon" folder:
 ```sh
-python manage.py makemigrations
-python manage.py migrate
+pip install --user virtualenv
+virtualenv myenv
+source myenv/bin/activate
+```
+#### To install dependencies navigate to the cloned repository which contains a 'requirements.txt' file then run pip install requirements.txt
+
+```sh
+cd Bangazon_1
+pip install requirements.txt
 ```
 
-
-#### You can now populate the data by running
+#### Create and seed the database by changing the permissions on this shell script and executing it with the following commands:
 
 ```sh
 chmod +x django_data.sh
-./django_data.sh Bangazon seeder
+./django_data.sh website buildDb.py
 ```
 
-#### You can now run the program by typing:
+
+#### You can now run the program by typing(You must be in the directory that contains the 'manage.py' file):
 
 ```sh
 python manage.py runserver 8080
 ```
+ #### navigate to localhost:8080 to access the website
 
 <h1 style="text-align:center; font-weight: bold;">Congratulations! You are now experiencing Bangazon!
-
-<h2 style="font-weight:bold;text-align:center" > Main functionality of Bangazon</h2>
-
-1. When user clicks Employees in the navigation bar, a list will appear showing all employees.
-1. When user clicks Departments in the navigation bar, a list will appear showing all departments.
-1. When user clicks on the department's name, the department's details will appear on a new page, showing the budget and the employees in the department.
-1. When the user clicks See All Departments, the list of departments will appear.
-1. When the user clicks Edit Department, a form pre-populated with the department information will apear.
-1. When the user clicks Submit, the department is edited with the information in the input fields, and the list of all departments will be shown.
-1. When the user clicks Add a New Department, a form to add a new department is shown.
-1. When the user clicks Submit, the department is saved to the database with the information in the input fields, and the list of all departments will be shown.
-1. When user clicks Computers in the navigation bar, a list will appear showing all computers.
-1. When user clicks Add Computer button, a form appears allowing a user to add a computer and assign it to an employee.
-1. From the Computers main page a user can click on a computer to view a computer's details
-1. From the Computer Details page, a user can delete a computer if it has never been assigned to an employee and a user can decomission a computer if it is not currently assigned.
-1. When user clicks Training Programs in the navigation bar, a list will appear showing all future training programs.
-1. When user clicks a specific Training Program while on the Training Programs page, details will appear displaying the Title, Description, Start Date, End Date, Max Enrollment, and Employees that are scheduled to attend.
-1. When user is on a specific Training Program page and user clicks Edit Training, a form will appear with the current details displaying the Title, Description, Start Date, End Date, and Max Enrollment with a Save button and a Cancel Edits button.
-1. When user clicks Save while on the Edit Training Programs page, the form will be checked for validation and the database will be updated with new information. The user will then be redirected to the main Training Page.
-1. When user clicks Cancel Edits while on the Edit Training Programs page, the user will then be redirected to the main Training Page.
-1. When user is on a specific Training Program page and user clicks Delete Training, the training will be removed from the database and the user will be redirected to the main Training Program page.
-1. When user clicks Past Training Programs while on the Training Programs page, a list will appear showing all past training programs.
-1. When user clicks a specific Training Program while on the Past Training Programs page, details will appear displaying the Title, Description, Start Date, End Date, Max Enrollment, and Employees that attended.
-
 
 <h2 style="text-align: center">Entity Relationship Diagrams</h2>
 
@@ -109,21 +96,24 @@ python manage.py runserver 8080
 
 <h2 style="text-align: center; font-weight: bold"> Visual Feature List</h2>
 
-<h3 style="text-align: center">To help you along, here is a visualization of the features, and behaviors of the application to get you started.</h3>
+<h3 style="text-align: center">Here is a visualization of the primary features and behaviors of the application to get you started.</h3>
 
-## Viewing the employee list and adding a new employee
-![new computer gif](https://github.com/garrulous-gobies/Bangazon_1/blob/nl-readme-gifs/images/employees.gif)
+## Registering a new account and browsing items
+![register new user gif](./images/read_me_gifs/register.gif)
 
-### Viewing the department list and adding a new department
-![new departments gif](https://github.com/garrulous-gobies/Bangazon_1/blob/nl-readme-gifs/images/newdepartment.gif)
+### Adding items to your "cart"
+![adding items gif](./images/read_me_gifs/additems.gif)
 
-### Viewing the training programs list and adding a new training program
-![new training gif](https://github.com/garrulous-gobies/Bangazon_1/blob/nl-readme-gifs/images/newtraining.gif)
+### Check out and complete your order with a new payment method
+![new training gif](./images/read_me_gifs/checkout.gif)
 
-### Editing an existing training programs. Past programs may not be edited.
-![edit training gif](https://github.com/garrulous-gobies/Bangazon_1/blob/nl-readme-gifs/images/edittraining.gif)
+### Search through all products by keyword in item title or description
+![edit training gif](./images/read_me_gifs/search.gif)
 
-### Viewing the computer list and adding a new computer
-![new computer gif](https://github.com/garrulous-gobies/Bangazon_1/blob/nl-readme-gifs/images/newcomputer.gif)
+### Edit your user details and view your order history.
+![new computer gif](./images/read_me_gifs/profile.gif)
+
+### Post a new item to sell on the marketplace.
+![new computer gif](./images/read_me_gifs/sellitem.gif)
 
 
