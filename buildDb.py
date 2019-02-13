@@ -340,5 +340,23 @@ c.execute('''INSERT INTO website_productlike VALUES (
              "The text might be alright, but I prefer pop-up books.",
              3,
              2)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             4,
+             "Similar to AppleTv",
+             6,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             3,
+             "Small gaming option.",
+             14,
+             1)''')
+c.execute('''INSERT INTO website_productlike VALUES (
+             Null,
+             2,
+             "Rather watch a movie.",
+             3,
+             1)''')
 
 conn.commit()

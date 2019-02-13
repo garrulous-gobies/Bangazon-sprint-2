@@ -10,6 +10,36 @@ from website.models import *
 
 def list_products(request):
     all_products = Product.objects.raw("SELECT * from website_product")
+    for product in all_products:
+        product.likedAverage = ""
+        allRatings = ProductLike.objects.raw('''SELECT * from website_productlike p
+                                            WHERE p.product_id = %s''', [product.id])
+        if len(allRatings) > 0:
+            ratingCount = 0
+            totalRating = 0
+            for item in allRatings:
+                totalRating += item.liked
+                ratingCount += 1
+            ratingAverage = totalRating / ratingCount
+            starPrint = 0
+            while ratingAverage > 0:
+                if ratingAverage > .75:
+                    product.likedAverage += '<img class="list_rating_star" src="../static/website/goldStar.png" alt="Gold Star">'
+                    ratingAverage -= 1
+                    starPrint += 1
+                elif ratingAverage > .25:
+                    product.likedAverage += '<img class="list_rating_star" src="../static/website/halfStar.png" alt="Half Star">'
+                    ratingAverage = 0
+                    starPrint += 1
+            while starPrint != 5:
+                product.likedAverage += '<img class="list_rating_star" src="../static/website/whiteStar.png" alt="White Star">'
+                starPrint += 1
+        else:
+            starPrint = 0
+            while starPrint != 5:
+                product.likedAverage += '<img class="list_rating_star" src="../static/website/whiteStar.png" alt="White Star">'
+                starPrint += 1
+
     template_name = 'product/list.html'
     return render(request, template_name, {'products': all_products})
 
@@ -39,6 +69,35 @@ def categories(request):
 
     for cat_id in ProductType.objects.raw(sql1):
         limit_products = Product.objects.raw(sql2, [cat_id.id,])
+        for product in limit_products:
+            product.likedAverage = ""
+            allRatings = ProductLike.objects.raw('''SELECT * from website_productlike p
+                                                WHERE p.product_id = %s''', [product.id])
+            if len(allRatings) > 0:
+                ratingCount = 0
+                totalRating = 0
+                for item in allRatings:
+                    totalRating += item.liked
+                    ratingCount += 1
+                ratingAverage = totalRating / ratingCount
+                starPrint = 0
+                while ratingAverage > 0:
+                    if ratingAverage > .75:
+                        product.likedAverage += '<img class="list_rating_star" src="../static/website/goldStar.png" alt="Gold Star">'
+                        ratingAverage -= 1
+                        starPrint += 1
+                    elif ratingAverage > .25:
+                        product.likedAverage += '<img class="list_rating_star" src="../static/website/halfStar.png" alt="Half Star">'
+                        ratingAverage = 0
+                        starPrint += 1
+                while starPrint != 5:
+                    product.likedAverage += '<img class="list_rating_star" src="../static/website/whiteStar.png" alt="White Star">'
+                    starPrint += 1
+            else:
+                starPrint = 0
+                while starPrint != 5:
+                    product.likedAverage += '<img class="list_rating_star" src="../static/website/whiteStar.png" alt="White Star">'
+                    starPrint += 1
         limit_products_list.append(limit_products)
 
     context = {"all_productTypes": all_productTypes, "limit_products_list": limit_products_list}
@@ -47,30 +106,58 @@ def categories(request):
 def product_details(request, product_id):
     user_id = request.user.id
     liked = ""
+    likedAverage = ""
+    ratings = "Null"
     try:
-        likeCount = ProductLike.objects.raw('''SELECT * from website_productlike p
-                                            WHERE p.product_id = %s AND p.user_id = %s''', [product_id, user_id])[0]
-        ratings = likeCount
-        rate = likeCount.liked
-        starPrint = 0
-        while rate > 0:
-            if rate > .75:
-                liked += '<img class="rating_star" src="../static/website/goldStar.png" alt="Gold Star">'
-                rate -= 1
-                starPrint += 1
-            elif rate > .25:
-                liked += '<img class="rating_star" src="../static/website/halfStar.png" alt="Half Star">'
-                rate = 0
-                starPrint += 1
-        while starPrint != 5:
-            liked += '<img class="rating_star" src="../static/website/whiteStar.png" alt="White Star">'
-            starPrint += 1
+        allRatings = ProductLike.objects.raw('''SELECT * from website_productlike p
+                                            WHERE p.product_id = %s''', [product_id])
     except:
-        ratings = "Null"
+        allRatings = "Null"
+
+    if len(allRatings) > 0:
+        ratingCount = 0
+        totalRating = 0
+        for item in allRatings:
+            totalRating += item.liked
+            ratingCount += 1
+            if item.user_id == user_id:
+                ratings = item
+        ratingAverage = totalRating / ratingCount
+        if ratings != "Null":
+            rate = ratings.liked
+            starPrint = 0
+            while rate > 0:
+                if rate > .75:
+                    liked += '<img class="rating_star" src="../static/website/goldStar.png" alt="Gold Star">'
+                    rate -= 1
+                    starPrint += 1
+                elif rate > .25:
+                    liked += '<img class="rating_star" src="../static/website/halfStar.png" alt="Half Star">'
+                    rate = 0
+                    starPrint += 1
+            while starPrint != 5:
+                liked += '<img class="rating_star" src="../static/website/whiteStar.png" alt="White Star">'
+                starPrint += 1
+        starPrint = 0
+        while ratingAverage > 0:
+            if ratingAverage > .75:
+                likedAverage += '<img class="rating_star" src="../static/website/goldStar.png" alt="Gold Star">'
+                ratingAverage -= 1
+                starPrint += 1
+            elif ratingAverage > .25:
+                likedAverage += '<img class="rating_star" src="../static/website/halfStar.png" alt="Half Star">'
+                ratingAverage = 0
+                starPrint += 1
+        while starPrint != 5:
+            likedAverage += '<img class="rating_star" src="../static/website/whiteStar.png" alt="White Star">'
+            starPrint += 1
+    else:
         starPrint = 0
         while starPrint != 5:
             liked += '<img class="rating_star" src="../static/website/whiteStar.png" alt="White Star">'
             starPrint += 1
+        likedAverage = liked
+
     product = Product.objects.raw('''SELECT * from website_product p
                                             WHERE p.id = %s''', [product_id])[0]
     orders = ProductOrder.objects.raw('''SELECT * from website_productOrder p
@@ -81,7 +168,7 @@ def product_details(request, product_id):
     quantity = product.quantity - orderCount
     product.quantity = quantity
     template_name = 'product_details.html'
-    return render(request, template_name, {'product': product, 'product_id': product_id, 'liked': liked, 'ratings': ratings})
+    return render(request, template_name, {'product': product, 'product_id': product_id, 'liked': liked, 'ratings': ratings, 'likedAverage': likedAverage})
 
 
 def category_list(request, productType_id):
