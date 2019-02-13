@@ -1,4 +1,5 @@
 {% extends "index.html" %}
+{% load staticfiles %}
 
 {% block content %}
 <p class="product_title"> {{product.title}}</p>
@@ -6,8 +7,16 @@
 <p class="product_description"> {{product.description}}<br></p>
 <p class="product_price">Price: ${{product.price}}</p>
 <p class="product_quantity">Quantity Available: {{product.quantity}}</p>
-<!-- href needs changed to add item to cart -->
 {% if user.is_authenticated %}
+<p class="rating_text">Your Item Ranking</p>
+<section class="star_rating">{{liked|safe}}</section>
+{% if ratings != "Null" %}
+<p class="rating_text">Your Comment</p>
+<p class="rating_comment">"{{ratings.comment}}"</p>
+{% endif %}
+<a class="add_to_cart" href="{% url 'website:edit_ratings' product_id %}">
+    Edit Rating/Comment
+</a>
 <a class="add_to_cart" href="{% url 'website:add_to_cart' product_id %}">
     Add To Cart
 </a>
