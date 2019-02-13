@@ -1,10 +1,10 @@
 from django.contrib.auth.models import User
 from django import forms
-from website.models import Product, Customer, PaymentMethod, PaymentType, ProductType
+from website.models import *
 
 class UserForm(forms.ModelForm):
         password = forms.CharField(widget=forms.PasswordInput())
-        
+
         class Meta:
             model = User
             fields = ('username', 'email', 'password', 'first_name', 'last_name',)
@@ -77,9 +77,9 @@ class CustomerForm(forms.ModelForm):
 
 class PaymentForm(forms.ModelForm):
     """Summary: Form for adding a new payment method. Creates a dropdown of all type of payment methods in DB and gives an input form for the account number
-    
+
     Model(s): PaymentType, PaymentMethod
-    
+
     Author(s): Austin Zoradi
     """
 
@@ -101,11 +101,15 @@ class PaymentForm(forms.ModelForm):
         model = PaymentMethod
         fields = ('accountNumber', 'paymentName')
 
+# class ProductLikeForm(forms.ModelForm):
+#         fields = ('liked', 'comment', 'product_id', 'user_id')
+
+
 class addPayment(forms.Form):
     """Summary: form to add a payment option to an order and in order to "pay" for the order and close it. Renders radio button with a label of the paymentCaetgory name and teh last four digits of the account number. The radio buttons have a value of the payment type if
 
     Model(s): Orders, PaymentType, PaymentMethod
-    
+
     Author(s): Austin Zoradi, Zac Jones
     """
 

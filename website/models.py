@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 
@@ -92,5 +92,20 @@ class ProductOrder(models.Model):
         on_delete=models.DO_NOTHING,
     )
     deleted = models.BooleanField(default=False)
+    def __str__(self):
+        return self
+
+
+class ProductLike(models.Model):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.DO_NOTHING,
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.DO_NOTHING,
+    )
+    liked = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
+    comment = models.CharField(max_length=200)
     def __str__(self):
         return self

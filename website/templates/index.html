@@ -8,8 +8,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'website/index.css' %}">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <title>Bangazon</title>
 </head>
@@ -32,23 +32,28 @@
     {% endif %}
 
     <h1 class="recently_add_title">Recently Added Products</h1>
-    <p class="all_products_link"><a  href="{% url 'website:list_products' %}">View All Products</a></p>
-    {% for product in products %}
-    <a class="main_item_link" href="{% url 'website:product_details' product.id%}">
-            <img class="main_index_image" src={{product.image}} alt={{product.title}}>
-            <p class="main_index_title">{{ product.title }}</p>
-            <p class="main_index_price">Price:  ${{product.price}}</p>
+    <p class="all_products_link"><a href="{% url 'website:list_products' %}">View All Products</a></p>
+    <article class="main_product_list">
+        {% for product in products %}
+        <a class="list_products" href="{% url 'website:product_details' product.id%}">
+            <img class="all_image" src={{product.image}} alt={{product.title}}>
+            <p class="all_list_title">{{ product.title }}</p>
+            <p class="all_list_price">Price: ${{product.price}}</p>
         </a>
-    {% endfor %}
+        {% endfor %}
+    </article>
 
     {% endblock content %}
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 </body>
 
