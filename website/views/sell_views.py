@@ -10,6 +10,10 @@ from django.contrib.auth.models import User
 from website.models import Product, Customer, ProductType
 from website.forms import UserForm, ProductForm
 
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+from django.utils.datastructures import MultiValueDictKeyError
+
 
 def sell_product(request):
     """Handles displaying, validating, and posting the new product form
@@ -34,6 +38,16 @@ def sell_product(request):
     elif request.method == 'POST':
         form_data = request.POST
 
+        try:
+            myfile = request.FILES['myfile']
+            fs = FileSystemStorage()
+            filename = fs.save(myfile.name, myfile)
+            uploaded_file_url = fs.url(filename)
+
+        except MultiValueDictKeyError:
+            myfile = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEbVj-dY-HFt1DhTc2JXe0LtqQ-HSDyMy1qvDNWJoFMtB7gfR9'
+            uploaded_file_url = myfile
+
         p_form_data = {
             'title': form_data['title'],
             'description': form_data['description'],
@@ -54,7 +68,7 @@ def sell_product(request):
                 p_form_data['description'],
                 p_form_data['price'],
                 p_form_data['quantity'],
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEbVj-dY-HFt1DhTc2JXe0LtqQ-HSDyMy1qvDNWJoFMtB7gfR9',
+                uploaded_file_url,
                 0,    #default boolean not deleted
                 customer_id,
                 p_form_data['category']
