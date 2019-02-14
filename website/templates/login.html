@@ -1,8 +1,10 @@
 {% extends "index.html" %}
+{% load staticfiles %}
 
 {% block content %}
 
-<h1>Login to Bangazon</h1>
+<h1 class="user_welcome">Login To</h1>
+<img class="bangazon_logo" src="{% static 'website/bangazon2icon.png' %}" alt="Bangazon Logo">
 
 <form id="login_form" method="post" action="{% url 'website:login' %}">
     {% csrf_token %}
@@ -11,7 +13,7 @@
     Password: <input type="password" name="password" value="" size="50" />
     <br />
 
-    <input type="submit" value="submit" />
+    <input class="register" type="submit" value="Login" />
 </form>
 
 {% endblock content %}

@@ -1,12 +1,14 @@
 {% extends "index.html" %}
+{% load staticfiles %}
 
 {% block content %}
-<p> Add a new payment option </p>
+<img class="bangazon_logo_medium" src="{% static 'website/bangazon2icon.png' %}" alt="Bangazon Logo">
+<h1 class="user_welcome">Add A New Payment {{ user.username }}!</h1>
 
-<form action="{% url 'website:add_payment' user.id %}" method="post">
+<form id="user_form" action="{% url 'website:add_payment' user.id %}" method="post">
     {% csrf_token %}
     {{ payment_form.as_p }}
     <input type="hidden" name="next" value="{{ request.GET.next }}">
-    <input type="submit"  class="btn btn-primary " value="Add Payment Option" />
+    <input id="register_new" type="submit" value="Add Payment Option" />
 </form>
 {% endblock content %}

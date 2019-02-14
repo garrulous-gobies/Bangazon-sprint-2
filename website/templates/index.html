@@ -24,11 +24,11 @@
     <img class="bangazon_logo" src="{% static 'website/bangazon2icon.png' %}" alt="Bangazon Logo">
     <h1 class="user_welcome">Welcome {{ user.username }}!</h1>
     {% else %}
-    <h1>Welcome to Bangazon!</h1>
+    <h1 class="user_welcome">Welcome To</h1>
     <img class="bangazon_logo" src="{% static 'website/bangazon2icon.png' %}" alt="Bangazon Logo">
-    <h1>Let's Get Started</h1>
-    <div><a href="{% url 'website:register' %}">Register</a></div>
-    <div><a href="{% url 'website:login' %}">Login</a></div>
+    <h1 class="sub_welcome">Let's Get Started</h1>
+    <div><a class="register" href="{% url 'website:register' %}">Register</a></div>
+    <div><a class="register" href="{% url 'website:login' %}">Login</a></div>
     {% endif %}
 
     <h1 class="recently_add_title">Recently Added Products</h1>

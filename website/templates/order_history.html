@@ -1,8 +1,10 @@
 {% extends "index.html" %}
+{% load staticfiles %}
 
 {% block content %}
 
-    <h3>Order History</h3>
+<img class="bangazon_logo_medium" src="{% static 'website/bangazon2icon.png' %}" alt="Bangazon Logo">
+<h1 class="user_welcome">{{ user.username }}'s Order History!</h1>
     {% for order in orders  %}
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
