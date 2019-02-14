@@ -3,6 +3,8 @@ from django import forms
 from website.models import *
 
 class UserForm(forms.ModelForm):
+    # Form class to create a new user
+    # Author: Brad Davis
         password = forms.CharField(widget=forms.PasswordInput())
 
         class Meta:
@@ -10,7 +12,8 @@ class UserForm(forms.ModelForm):
             fields = ('username', 'email', 'password', 'first_name', 'last_name',)
 
 class CustomerForm(forms.ModelForm):
-
+    # Form class to create a new customer
+    # Author: Brad Davis
     class Meta:
         model = Customer
         fields = ('address', 'phoneNumber',)
@@ -101,8 +104,10 @@ class PaymentForm(forms.ModelForm):
         model = PaymentMethod
         fields = ('accountNumber', 'paymentName')
 
-# class ProductLikeForm(forms.ModelForm):
-#         fields = ('liked', 'comment', 'product_id', 'user_id')
+class ProductLikeForm(forms.ModelForm):
+    # Form class to create or edit ratings
+    # Author: Brad Davis
+        fields = ('liked', 'comment', 'product_id', 'user_id')
 
 
 class addPayment(forms.Form):
