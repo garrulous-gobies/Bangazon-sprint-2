@@ -1,12 +1,13 @@
 {% extends "index.html" %}
-
+{% load staticfiles %}
 
 {% block content %}
 <section>
-    <h2 class="product_title"> {{user.username}}, Thank You For Your Order! </h2>
-    <p class="text_center lrg-txt">Your Order is on it's Way</p>
+        <img class="bangazon_logo_medium" src="{% static 'website/bangazon2icon.png' %}" alt="Bangazon Logo">
+        <h1 class="user_welcome">Thanks {{ user.username }}!</h1>
+    <h2 class="product_title"> Your Order Is On It's Way! </h2>
     <div class="shop_btn">
-        <button class="btn btn-primary"><a href="{% url 'website:categories' %}">Continue Shopping</a></button>
+        <button id="register_new" ><a href="{% url 'website:categories' %}">Continue Shopping</a></button>
     </div>
 </section>
 

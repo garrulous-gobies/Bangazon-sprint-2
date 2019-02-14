@@ -1,24 +1,26 @@
 {% extends "index.html" %}
+{% load staticfiles %}
 
 {% block content %}
 
-<h1>Welcome to Your Profile, {{profile.first_name}}</h1>
+<img class="bangazon_logo_medium" src="{% static 'website/bangazon2icon.png' %}" alt="Bangazon Logo">
+<h1 class="user_welcome">Welcome {{ user.username }}!</h1>
 
-<h3>Your Information</h3>
+<h3 class="profile_title">Your Profile Information</h3>
 
-<ul>
+<ul class="profile_list">
     <li>First Name: {{profile.first_name}}</li>
     <li>Last Name: {{profile.last_name}}</li>
     <li>Address: {{profile.address}}</li>
     <li>Phone: {{profile.phoneNumber}}</li>
 </ul>
 
-<button class="btn btn_margin btn-primary"><a href="{% url 'website:edit_profile' profile.id %}">Edit My
+<button id="profile_btn" class="profile_btn btn btn_margin btn-primary"><a href="{% url 'website:edit_profile' profile.id %}">Edit My
         Info</a></button>
 
-<h3>Payment Options</h3>
+<h3 class="profile_title">Payment Options</h3>
 
-<ul>
+<ul class="profile_list">
     {% for type in payment_types %}
     <li class="flex_this">
         <p>{{type.paymentCategory}} ending in {{type.Four}}</p>
@@ -29,12 +31,12 @@
 
 </ul>
 
-<button class="btn btn-primary">
+<button id="profile_btn" class=" btn btn-primary">
     <a href="{% url 'website:add_payment' user.id %}?next={{ request.path|urlencode }}">Add Payment Type</a>
 </button>
 
 <div class="mt-3">
-    <button class="btn btn-primary">
+    <button id="profile_btn"  class="btn btn-primary">
         <a href="{% url 'website:order_history' user.id %}">View Order History</a>
     </button>
 </div>

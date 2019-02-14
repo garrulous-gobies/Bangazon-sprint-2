@@ -1,12 +1,14 @@
 {% extends "index.html" %}
+{% load staticfiles %}
 
 {% block content %}
-<h1>Sell Product</h1>
-<form action="{% url 'website:sell' %}" method="post" enctype="multipart/form-data">
+<img class="bangazon_logo_medium" src="{% static 'website/bangazon2icon.png' %}" alt="Bangazon Logo">
+<h1 class="user_welcome">Sell A Product {{ user.username }}!</h1>
+<form id="user_form" action="{% url 'website:sell' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ product_form.as_p }}
-    <input type="file" name="myfile">
-    <input type="submit" value="Sell It" />
+    <input id="register_new_file" type="file" name="myfile">
+    <input id="register_new" type="submit" value="Sell It" />
 </form>
 
 {% endblock content %}
